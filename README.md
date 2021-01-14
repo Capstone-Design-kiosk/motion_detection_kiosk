@@ -34,11 +34,11 @@ create table Order_List(
     order_num int not null,
     menu_num int not null,
     quatity varchar(3) not null,
-    FOREIGN KEY (order_num) REFERENCES Order (order_id),
+    FOREIGN KEY (order_num) REFERENCES `Order` (order_id),
 	FOREIGN KEY (menu_num) REFERENCES Menu (Menu_id)
 );
 
-create table Order(  
+create table `Order`(  
     order_id int auto_increment primary key,
     time datetime not null,
     total_price varchar(15) not null
