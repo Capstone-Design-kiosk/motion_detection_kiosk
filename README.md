@@ -6,10 +6,10 @@
 - pip install mysqlclient
 
 ## DB
-##### 테이블 이름은 kiosk
-##### 자세한 설정은 settings.py 참고
+##### 테이블 이름: kiosk
+*자세한 설정은 settings.py 참고*
 
-테이블 *Order*의 의미로 사용된 부분은 mysql에서 예약어로 사용되기 때문에 백틱으로 묶어줘야한다. (백틱은 키보드에서 물결)  
+테이블 **Order**의 의미로 사용된 부분은 mysql에서 예약어로 사용되기 때문에 **백틱**으로 묶어줘야한다. (백틱은 키보드에서 물결)  
 
 use kiosk;
 
