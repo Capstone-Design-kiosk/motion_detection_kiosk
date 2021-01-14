@@ -20,14 +20,14 @@
 ```sql
 use kiosk;
 
-create table Menu(  
-	menu_id int auto_increment primary key,  
-    name varchar(30) not null,  
-    image blob not null,  
-    des longtext not null,  
-    price varchar(15) not null,  
-    cat varchar(30) not null  
-);  
+create table Menu(
+	menu_id int auto_increment primary key,
+    name varchar(30) not null,
+    image blob not null,
+    des longtext not null,
+    price varchar(15) not null,
+    cat varchar(30) not null
+);
 
 create table Order_List(  
 	list_id int auto_increment primary key,  
