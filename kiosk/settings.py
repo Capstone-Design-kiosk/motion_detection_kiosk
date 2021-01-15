@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'kiosk',
     'CamApp',
     'accounts',
     'django.contrib.admin',
@@ -81,9 +82,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kiosk',
         'USER': 'root',
-        'PASSWORD': 'password',
+        'PASSWORD': '038062',
         'HOST': 'localhost',
-        'PORT': '3308',
+        'PORT': '3306',
     }
 }
 
@@ -135,7 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL='index'
+LOGIN_REDIRECT_URL='/menu_list' #로그인 성공시 menu_list.html로 이동
 LOGOUT_REDIRECT_URL='index'
 
 AUTH_USER_MODEL='auth.User'

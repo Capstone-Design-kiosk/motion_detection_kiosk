@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if user.is_active %}
+    <div class="row mt-5">
+      <div class="col-12">
+          <a href="{% url 'logout' %}">logout</a>
+          <img src = '{% url "feed" %}' width = "500px"  height = "400px">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">제목</th>
+              <th scope="col">이미지</th>
+              <th scope="col">상세설명</th>
+              <th scope="col">가격</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for Menu in Menus %}
+            <tr>
+              <th scope="row">{{ Menu.menu_id }}</th>
+            <td>{{ Menu.name }}</td>
+            <td>
+            {% if Menu.image %}
+                <img src="{{ Menu.image.url }}" width="100" height="100">
+            {% endif %}
+            </td>
+            <td>{{ Menu.des }}</td>
+             <td>{{ Menu.price }}</td>
+            </tr>
+          {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <a class="nav-link" href="{% url 'menu_register' %}">new post</a>
+      </div>
+    </div>
+    {% else %}   #로그인 안하고 접근시 메인 페이지로
+        <script type="text/javascript">
+            alert('로그인을 먼저 해주세요');
+            window.location.href='{%url 'index' %}';
+        </script>
+    {% endif %}
+
+</body>
+</html>

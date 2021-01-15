@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from .forms import CreateUserForm
@@ -18,3 +19,4 @@ def signup(request):
         userform=CreateUserForm()
 
     return render(request, 'registration/signup.html',{"userform":userform})
+

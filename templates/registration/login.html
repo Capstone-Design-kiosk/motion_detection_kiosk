@@ -6,17 +6,17 @@
 </head>
 <body>
 
-    <div>
-        {% if form.errors %}
-        <p>아이디나 비밀번호가 맞지 않습니다.</p>
-        {% endif %}
+     <div>
+            {% if form.errors %}
+            <p>아이디나 비밀번호가 맞지 않습니다.</p>
+            {% endif %}
 
-        login
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit">Login</button>
-        </form>
-    </div>
+            login
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">Login</button>
+            </form>
+        </div>
 </body>
 </html>

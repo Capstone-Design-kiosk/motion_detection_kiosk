@@ -1,9 +1,20 @@
+# 사용시
+- settings.py에서 본인의 DB로 설정
+# 수정 내용
+- image varchar(600)으로 변경
+- python -m pip install Pillow(이미지 추가 위함)
 # 현재 진행
 - 카메라 html에 스트리밍
 - 메뉴/주문 디비 연결 
 - 회원가입/로그인 
+- 메뉴 리스트보기(로그인 이용후 사용 가능)
+- 메뉴 등록하기
 # 해야 할 것
-- 주문/결제 페이지 만들기
+- 메뉴 상세보기
+- 메뉴 수정하기
+- 메뉴 삭제하기
+- 메뉴 리스트 페이징  
+- 주문서 만들기
 
 # motion_detection_kiosk
 2021년 캡스톤 디자인
@@ -11,7 +22,7 @@
 ## Install
 - pip install opencv-python
 - pip install mysqlclient
-
+- python -m pip install Pillow(이미지 추가 위함)
 ## DB
 ##### 테이블 이름: kiosk
 *자세한 설정은 settings.py 참고*
@@ -23,7 +34,7 @@ use kiosk;
 create table Menu(
     menu_id int auto_increment primary key,
     name varchar(30) not null,
-    image blob not null,
+    image blob not null ->image varchar(600),
     des longtext not null,
     price varchar(15) not null,
     cat varchar(30) not null

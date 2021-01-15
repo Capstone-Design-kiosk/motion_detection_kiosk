@@ -4,13 +4,10 @@
 </head>
 
 <body>
-    {% if user.is_active %}
-    <p><a href="{% url 'logout' %}">logout</a></p>
-    {% else %}
+
     <a href="{% url 'login' %}">login</a>
     <a href="{% url 'accounts:signup' %}">signup</a>
-    {% endif %}
 
-    <img src = '{% url "feed" %}' width = "500px"  height = "400px">
+
 </body>
 </html>
