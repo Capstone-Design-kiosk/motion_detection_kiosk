@@ -22,7 +22,7 @@
           </thead>
 
           <tbody>
-          {% for Menu in Menus %}
+          {% for Menu in menu_list %}
             <tr>
               <th scope="row">{{ Menu.menu_id }}</th>
             <td>{{ Menu.name }}</td>
@@ -34,16 +34,33 @@
             <td>{{ Menu.des }}</td>
              <td>{{ Menu.price }}</td>
             </tr>
+            <!--delete-->
+            <td class='menu_delete'>
+              <a href="{% url 'menu_delete' Menu.menu_id %}" onclick="return confirm('정말로 삭제하시겠습니까?')"> 삭제</a>
+            </td>
           {% endfor %}
             </tbody>
         </table>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <a class="nav-link" href="{% url 'menu_register' %}">new post</a>
-      </div>
+    <!--pagination-->
+    <div class="pagination">
+      {% if menu_list.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ menu_list.number|add:-1 }}">previous</a>
+          {% endif %}
+
+          {% for i in p_range %}
+              <a href="?page={{i}}" {% if menu_list.number == i %}class="active" {% endif %}>{{i}}</a>
+          {% endfor %}
+
+          {% if menu_list.has_next %}
+              <a href="?page={{ menu_list.number|add:+1  }}">next</a>
+              <a href="?page={{ menu_list.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
     </div>
+
     {% else %}   #로그인 안하고 접근시 메인 페이지로
         <script type="text/javascript">
             alert('로그인을 먼저 해주세요');

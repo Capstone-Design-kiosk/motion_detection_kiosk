@@ -14,5 +14,5 @@ urlpatterns = [
     path('menu_list/', views.menu_list),
     path('menu_register/', views.menu_register,name='menu_register'),
     path('postcreate/', views.postcreate, name='postcreate'),
-
+    path('menu_list/<int:menu_id>/menu_delete',views.menu_delete,name='menu_delete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
