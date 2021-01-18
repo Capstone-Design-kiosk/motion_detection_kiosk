@@ -10,6 +10,11 @@
       <div class="col-12">
           <a href="{% url 'logout' %}">logout</a>
           <img src = '{% url "feed" %}' width = "500px"  height = "400px">
+          <div class="row">
+            <div class="col-12">
+             <a class="nav-link" href="{% url 'menu_register' %}">메뉴 등록하기</a>
+            </div>
+        </div>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -38,9 +43,11 @@
             <td class='menu_delete'>
               <a href="{% url 'menu_delete' Menu.menu_id %}" onclick="return confirm('정말로 삭제하시겠습니까?')"> 삭제</a>
             </td>
+
           {% endfor %}
             </tbody>
         </table>
+
       </div>
     </div>
     <!--pagination-->

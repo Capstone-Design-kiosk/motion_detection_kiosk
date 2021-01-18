@@ -82,9 +82,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kiosk',
         'USER': 'root',
-        'PASSWORD': 'password',
+        'PASSWORD': '038062',
         'HOST': 'localhost',
-        'PORT': '3308',
+        'PORT': '3306',
     }
 }
 
