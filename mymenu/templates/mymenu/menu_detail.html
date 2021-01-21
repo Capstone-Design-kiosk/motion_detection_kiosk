@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_active %}
+    <h1>{{menu.name}}</h1>
+    <p>{{menu.id}}</p>
+    <p>{{menu.image}}</p>
+    <p>{{menu.des}}</p>
+    <p>{{menu.price}}</p>
+    <p>{{menu.cat}}</p>
+    <a href="{% url 'menu_list' %}">리스트 보기</a>
+    <a href="{% url 'menu_edit' menu.pk %}">수정하기</a>
+{% endif %}
+
+</body>
+</html>

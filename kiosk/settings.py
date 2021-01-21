@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'kiosk',
+    'mymenu',
     'CamApp',
     'accounts',
     'django.contrib.admin',
