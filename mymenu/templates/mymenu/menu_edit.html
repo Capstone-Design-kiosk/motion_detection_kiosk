@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">수정하기</button>
+</form>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	{% if user.is_active %}
+    <div class="container">
+		<form method="POST">
+			{% csrf_token %}
+			{{form.as_p}}
+			<button type="submit">저장</button>
+		</form>
+	</div>
+	 {% else %}   #로그인 안하고 접근시 메인 페이지로
+        <script type="text/javascript">
+            alert('로그인을 먼저 해주세요');
+            window.location.href='{%url 'index' %}';
+        </script>
+    {% endif %}
+</body>
+</html>
