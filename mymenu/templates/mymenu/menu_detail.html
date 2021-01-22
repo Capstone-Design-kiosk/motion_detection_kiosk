@@ -3,18 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+    div {
+        width: 100%;
+        hegiht:100%
+        border: 1px solid #000;
+    }
+    div.left {
+        width: 60%;
+        float: left;
+        box-sizing: border-box;
+
+
+    }
+    div.right {
+        width: 40%;
+        float: right;
+        box-sizing: border-box;
+
+
+    }
+    </style>
 </head>
 <body>
-{% if user.is_active %}
-    <h1>{{menu.name}}</h1>
-    <p>{{menu.id}}</p>
-    <p>{{menu.image}}</p>
-    <p>{{menu.des}}</p>
-    <p>{{menu.price}}</p>
-    <p>{{menu.cat}}</p>
-    <a href="{% url 'menu_list' %}">리스트 보기</a>
-    <a href="{% url 'menu_edit' menu.pk %}">수정하기</a>
-{% endif %}
+    <div class="left">
+    {% if user.is_active %}
+        <h1>{{menu.name}}</h1>
+        <img src="{{ menu.image.url }}" width="100" height="100">
+        <p>{{menu.des}}</p>
+        <p>{{menu.price}}</p>
+        <p>{{menu.cat}}</p>
+       <-----------주문서----------->
+       <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" id="menu_id" name="menu_id" value={{menu.menu_id}}>
+        <input type="hidden" id="price" name="price" value={{menu.price}}>
+
+        {{form.as_p}}
+
+             <button type="submit" >장바구니 담기</button>
+        </form>
+       </div>
+        <a href="{% url 'menu_list' %}">리스트 보기</a>
+    </div>
+    <div class="right">
+        <img src = '{% url "feed" %}' width = "500px"  height = "300px">
+    </div>
+    {% else %}   #로그인 안하고 접근시 메인 페이지로
+        <script type="text/javascript">
+            alert('로그인을 먼저 해주세요');
+            window.location.href='{%url 'index' %}';
+        </script>
+    {% endif %}
 
 </body>
 </html>

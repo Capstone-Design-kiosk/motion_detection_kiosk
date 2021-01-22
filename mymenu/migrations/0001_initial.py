@@ -42,7 +42,9 @@ class Migration(migrations.Migration):
             name='OrderList',
             fields=[
                 ('list_id', models.AutoField(primary_key=True, serialize=False)),
-                ('quatity', models.CharField(max_length=3)),
+                ('quantity', models.IntegerField(max_length=3)),
+                ('price', models.IntegerField(max_length=3)),
+                ('cup', models.CharField(max_length=15)),
             ],
             options={
                 'db_table': 'order_list',

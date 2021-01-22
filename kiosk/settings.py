@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
 
@@ -136,7 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL='/menu_list' #로그인 성공시 menu_list.html로 이동
+LOGIN_REDIRECT_URL='/mymenu/menu_list' #로그인 성공시 menu_list.html로 이동
 LOGOUT_REDIRECT_URL='index'
 
 AUTH_USER_MODEL='auth.User'

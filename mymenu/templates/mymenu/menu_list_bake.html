@@ -28,10 +28,6 @@
 <body>
     {% if user.is_active %}
     <div class="left">
-        <a href="{% url 'menu_list' %}">hot_coffee</a>
-        <a href="{% url 'menu_list_coldcoffee' %}">cold_coffee</a>
-        <a href="{% url 'menu_list_beverage' %}">beverage</a>
-        <a href="{% url 'menu_list_bake' %}">bake</a>
       <div class="col-12">
           <a href="{% url 'logout' %}">logout</a>
           <a href="{% url 'menu_register' %}">메뉴등록하기</a>
