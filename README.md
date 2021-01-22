@@ -63,7 +63,10 @@ create table Order_List(
     list_id int auto_increment primary key,
     order_num int not null,
     menu_num int not null,
-    quatity varchar(3) not null,
+    quatity INT(100) not null,
+    cup VARCHAR(45) default 'here'
+    price INT(225),
+    
     FOREIGN KEY (order_num) REFERENCES `Order` (order_id),
 	FOREIGN KEY (menu_num) REFERENCES Menu (Menu_id)
 );
