@@ -1,6 +1,5 @@
 from django import forms
-from .models import Menu
-from .models import OrderList
+from .models import Menu, OrderList
 
 class MenuForm(forms.ModelForm):
     class Meta:
@@ -20,4 +19,3 @@ class OrderForm(forms.ModelForm):
             'quantity': '수량',
             'cup': '포장여부',
         }
-

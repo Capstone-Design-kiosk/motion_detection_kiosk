@@ -6,12 +6,13 @@
 - order_list 에 quantity INT(100)로 변경
 - order 에 total_price INT(255)로 변경
 - Menu DB에 cat={"HOT_COFFEE","COLD_COFFEE","BEVERAGE","BAKE"}
+
+- order_list에 menu_name VARCHAR(30) 추가, FK MENU에 name
+- menu에 name에 unigue 추가 설정
+-
 # 문제점
-- 장바구니 추가 시 메뉴 이름이 아니라 번호가 출력(수정해야함)
-- 주문하기를 누르면 ORDER order_id는 1씩 증가함
-  But 처음 로그인 시 주문서 번호는 항상 1이라 나중에 겹치기 때문에 로그인 시
-  ORDER의 order_id의 최근 값을 가져와 설정하도록 해야함
-  (models.py 에 Myordernum)
+- 장바구니 추가 시 메뉴 이름이 아니라 번호가 출력(DB에는 이름 제대로 저장-html에는 왜 이름이 안뜨는지 모르겠음))
+
 # 현재 진행
 - 카메라 html에 스트리밍
 - 메뉴/주문 디비 연결
@@ -33,7 +34,7 @@
 - 카메라 손동작 인식으로 페이지 전환
 - 카메라 손동작 인식으로 카페고리별 페이지 전환
 - 카메라 손가락 숫자 인식으로 번호 인식해 번호 DB에 넘기기
-- html css폴더 만들어 참조사용 가능하도록
+- html css폴더 만들어 참조사용 가능하도록 (완료)
 # motion_detection_kiosk
 2021년 캡스톤 디자인
 
@@ -52,7 +53,7 @@ use kiosk;
 
 create table Menu(
     menu_id int auto_increment primary key,
-    name varchar(30) not null,
+    name varchar(30) not null unigue,
     image blob not null ->image varchar(600),
     des longtext not null,
     price varchar(15) not null,
@@ -66,9 +67,10 @@ create table Order_List(
     quatity INT(100) not null,
     cup VARCHAR(45) default 'here'
     price INT(225),
-    
+    menu_name VARCHAR(30),
     FOREIGN KEY (order_num) REFERENCES `Order` (order_id),
-	FOREIGN KEY (menu_num) REFERENCES Menu (Menu_id)
+	FOREIGN KEY (menu_num) REFERENCES Menu (Menu_id),
+  FOREIGN KEY (menu_name) REFERENCES `Menu` (name),
 );
 
 create table `Order`(  

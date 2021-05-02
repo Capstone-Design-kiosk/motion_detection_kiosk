@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Menu(models.Model):
     menu_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     image = models.TextField()
     des = models.TextField()
     price = models.CharField(max_length=15)
@@ -29,7 +29,8 @@ class Order(models.Model):
 class OrderList(models.Model):
     list_id = models.AutoField(primary_key=True)
     order_num = models.ForeignKey(Order, models.DO_NOTHING, db_column='order_num')
-    menu_num = models.ForeignKey(Menu, models.DO_NOTHING, db_column='menu_num')
+    menu_num = models.ForeignKey(Menu, related_name='menu_num', on_delete=models.CASCADE, db_column='menu_num')
+    menu_name = models.ForeignKey(Menu, to_field='name', related_name='menu_name', on_delete=models.CASCADE, db_column='menu_name')
     quatity = models.CharField(max_length=3)
 
     class Meta:

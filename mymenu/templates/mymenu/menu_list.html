@@ -1,29 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-    div {
-        width: 100%;
-        hegiht:100%
-        border: 1px solid #000;
-    }
-    div.left {
-        width: 60%;
-        float: left;
-        box-sizing: border-box;
-
-
-    }
-    div.right {
-        width: 40%;
-        float: right;
-        box-sizing: border-box;
-
-
-    }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/mymenu/menu_list.css' %}">
 </head>
 <body>
     {% if user.is_active %}
@@ -32,9 +13,11 @@
         <a href="{% url 'menu_list_coldcoffee' %}">cold_coffee</a>
         <a href="{% url 'menu_list_beverage' %}">beverage</a>
         <a href="{% url 'menu_list_bake' %}">bake</a>
+        <hr>
       <div class="col-12">
           <a href="{% url 'logout' %}">logout</a>
-          <a href="{% url 'menu_register' %}">메뉴등록하기</a>
+          <hr>
+          <a href="{% url 'menu_register' %}">메뉴등록하기</a><hr>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -89,8 +72,9 @@
       </span>
     </div>
     </div>
-
-
+        {% for Orderlist in Myorder %}
+            <p>{{ Orderlist.menu_name }}</p>
+        {% endfor %}
     <div class="right">
         <div>
         <img src = '{% url "feed" %}' width = "500px"  height = "300px">
@@ -100,6 +84,7 @@
         <table class="table">
         <thread>
         <th scope="col">제품번호</th>
+        <th scope="col">제품이름</th>
         <th scope="col">수량</th>
         <th scope="col">가격</th>
         <th scope="col">포장여부</th>
@@ -107,7 +92,8 @@
         <tbody>
         {% for Orderlist in Myorder %}
         <tr>
-            <td>{{ Orderlist.menu_num }}</td>
+            <td>{{ Orderlist.menu_num}}</td>
+            <td>{{ Orderlist.menu_name }}</td>
             <td>{{ Orderlist.quantity }}</td>
             <td>{{ Orderlist.price }}</td>
             <td>{{ Orderlist.cup }}</td>

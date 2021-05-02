@@ -1,29 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-    div {
-        width: 100%;
-        hegiht:100%
-        border: 1px solid #000;
-    }
-    div.left {
-        width: 60%;
-        float: left;
-        box-sizing: border-box;
-
-
-    }
-    div.right {
-        width: 40%;
-        float: right;
-        box-sizing: border-box;
-
-
-    }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/mymenu/menu_list.css' %}">
 </head>
 <body>
     <div class="left">
@@ -38,6 +19,7 @@
         <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" id="menu_id" name="menu_id" value={{menu.menu_id}}>
+        <input type="hidden" id="name" name="name" value={{menu.name}}>
         <input type="hidden" id="price" name="price" value={{menu.price}}>
 
         {{form.as_p}}

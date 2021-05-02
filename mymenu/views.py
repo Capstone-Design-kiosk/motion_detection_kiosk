@@ -83,6 +83,7 @@ def menu_detail(request,menu_id):  #주문서 페이지 들어가기
     w1.save()
     if request.method == "POST":  #주문페이지
         menu_id=Menu.objects.get(menu_id=request.POST['menu_id'])
+        name=Menu.objects.get(name=request.POST['name'])
         order_id = Order.objects.get(order_id=Order.Myordernum)
         price= request.POST['price']
         quantity = request.POST['quantity']
@@ -90,6 +91,7 @@ def menu_detail(request,menu_id):  #주문서 페이지 들어가기
         if form.is_valid():
             order = form.save(commit=False)
             order.menu_num=menu_id
+            order.menu_name=name
             order.order_num=order_id
             order.price=int(price)*int(quantity)
             order.save()
@@ -97,7 +99,7 @@ def menu_detail(request,menu_id):  #주문서 페이지 들어가기
             Order.objects.filter(order_id=Order.Myordernum).update(time=now)
             sum = OrderList.objects.filter(order_num=Order.Myordernum).aggregate(Sum('price'))
             Order.objects.filter(order_id=Order.Myordernum).update(total_price=sum['price__sum'])
-
+           
             return redirect('menu_list')
     else:
         form = OrderForm()
