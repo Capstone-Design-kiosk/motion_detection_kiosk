@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/mymenu/menu_list.css' %}">
 </head>
 <body>
-    {% if user.is_active %}
+
     <div class="left">
         <a href="{% url 'menu_list' %}">hot_coffee</a>
         <a href="{% url 'menu_list_coldcoffee' %}">cold_coffee</a>
@@ -15,9 +15,10 @@
         <a href="{% url 'menu_list_bake' %}">bake</a>
         <hr>
       <div class="col-12">
-          <a href="{% url 'logout' %}">logout</a>
-          <hr>
+          {% if user.is_active %}
+          <a href="{% url 'logout' %}">logout</a><hr>
           <a href="{% url 'menu_register' %}">메뉴등록하기</a><hr>
+          {% endif %}
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -43,12 +44,14 @@
              <td>{{ Menu.price }}</td>
             </tr>
             <!--delete-->
+          {% if user.is_active %}
             <td class='menu_delete'>
               <a href="{% url 'menu_delete' Menu.menu_id %}" onclick="return confirm('정말로 삭제하시겠습니까?')"> 삭제</a>
             </td>
             <td>
             <a href="{% url 'menu_edit' Menu.menu_id %}">수정</a>
             </td>
+          {% endif %}
           {% endfor %}
             </tbody>
         </table>
@@ -121,12 +124,6 @@
         </table>
     </div>
 
-    {% else %}   #로그인 안하고 접근시 메인 페이지로
-        <script type="text/javascript">
-            alert('로그인을 먼저 해주세요');
-            window.location.href='{%url 'index' %}';
-        </script>
-    {% endif %}
 
 </body>
 </html>

@@ -5,10 +5,45 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">수정하기</button>
-</form>
+{% if user.is_active %}
+    <div class="container">
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.non_field_errors }}
+			<div class="fieldWrapper">
+				{{ form.name.errors }}
+				<label for="id_name">이름: </label>
+				{{ form.name }}
+			</div>
+			<br>
+			<div class="fieldWrapper">
+				{{ form.image.errors }}
+				<label for="image">사진: </label>
+				{{ form.image }}
+			</div>
+			<br>
+			<p>설명:</p>
+			<div class="fieldWrapper">
+				{{ form.des.errors }}
+				 <label for="id_des"> </label>
+				{{ form.des }}
+			</div>
+			<br>
+			<div class="fieldWrapper">
+				{{ form.price.errors }}
+				<label for="id_price">가격: </label>
+				{{ form.price }}
+			</div>
+			<br>
+			<div class="fieldWrapper">
+				{{ form.cat.errors }}
+				<label for="id_cat">카테고리: </label>
+				{{ form.cat }}
+			</div>
+			<br>
+			<button type="submit">수정하기</button>
+		</form>
+	</div>
+{% endif %}
 </body>
 </html>
