@@ -75,9 +75,7 @@
       </span>
     </div>
     </div>
-        {% for Orderlist in Myorder %}
-            <p>{{ Orderlist.menu_name }}</p>
-        {% endfor %}
+
     <div class="right">
         <div>
         <img src = '{% url "feed" %}' width = "500px"  height = "300px">
@@ -86,7 +84,6 @@
         <!-----------장바구니------------>
         <table class="table">
         <thread>
-        <th scope="col">제품번호</th>
         <th scope="col">제품이름</th>
         <th scope="col">수량</th>
         <th scope="col">가격</th>
@@ -95,8 +92,7 @@
         <tbody>
         {% for Orderlist in Myorder %}
         <tr>
-            <td>{{ Orderlist.menu_num}}</td>
-            <td>{{ Orderlist.menu_name }}</td>
+            <td>{{ Orderlist.menu_name.name}}</td> <!--.name으로 이름 나오도록 수정-->
             <td>{{ Orderlist.quantity }}</td>
             <td>{{ Orderlist.price }}</td>
             <td>{{ Orderlist.cup }}</td>
@@ -107,11 +103,10 @@
 
         </tbody>
         <tbody>
-        {% for total in Total %}
         <tr>
             <th>최종가격:</th>
+        {% for total in Total %}
             <td>{{ total.total_price }}</td>
-
         </tr>
         <td class='order_confirm'>
               <a href="{% url 'order_confirm' total.order_id %}" onclick="return confirm('주문하시겠습니까?')"> 주문하기</a>

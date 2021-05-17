@@ -1,22 +1,32 @@
 from django.shortcuts import render
-from django.http import HttpResponse, StreamingHttpResponse
-import cv2
 from django.views.decorators import gzip
-
-
-def WebCam():
-    cap = cv2.VideoCapture(0) #내장캠으로 연결 -> 웹캠 연결 후 번호 수정하기
-    while True:
-        ret, frame = cap.read()
-        ret, encodedframe = cv2.imencode(".jpeg", frame)
-        encodedframe = encodedframe.tobytes()
-        yield b'--frame\r\n' + b'Content-Type:image/jpeg\r\n\r\n' + encodedframe + b'\r\n'
-
+from django.http import StreamingHttpResponse
+from .camera import VideoCamera
+import cv2
+import threading
 
 def index(request):
     return render(request, "CamApp/index.html")
 
 
-@gzip.gzip_page
+def gen(camera): #영상화면 출력
+    while True:
+        frame = camera.get_frame()
+        yield(b'--frame\r\n'
+              b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
 def feed(request):
-    return StreamingHttpResponse(WebCam(), content_type="multipart/x-mixed-replace; boundary=frame")
+    return StreamingHttpResponse(gen(VideoCamera()),
+                                 content_type='multipart/x-mixed-replace; boundary=frame')
+
+
+#
+# @gzip.gzip_page
+# def video_feed(request):
+#     try:
+#         cam = VideoCamera()
+#         return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+#     except:  # This is bad! replace it with proper handling
+#         print("에러입니다...")
+#         pass

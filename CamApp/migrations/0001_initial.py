@@ -41,8 +41,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='OrderList',
             fields=[
-                ('list_id', models.AutoField(primary_key=True, serialize=False)),
-                ('quatity', models.CharField(max_length=3)),
+
             ],
             options={
                 'db_table': 'order_list',
