@@ -15,8 +15,7 @@ try:
     latestnum2=hash(latestnum.order_num)+1
 except OrderList.DoesNotExist:#맨처음 프로그램 실행시 order내용이 아예 없을 때
     latestnum2=1
-
-newnum=latestnum2+1#결제하기 누르고 다음 사람을 위해 이어지는 주문번호
+newnum = latestnum2 + 1  # 결제하기 누르고 다음 사람을 위해 이어지는 주문번호
 
 def menu_list(request):
     if trynum==0:#########################################프로그램 처음 실행시 가장 최신 번호(당일 첫사용자)
@@ -129,9 +128,9 @@ def menu_edit(request, menu_id):
 
 def menu_detail(request,menu_id):  #주문서 페이지 들어가기
     menu_detail=get_object_or_404(Menu, pk=menu_id)
-    w1=Order(order_id=latestnum2,time=datetime.datetime.now()) #DB order 생성
-    w1.save()
     if trynum == 0:
+        w1 = Order(order_id=latestnum2, time=datetime.datetime.now())  # DB order 생성
+        w1.save()
         if request.method == "POST":  #주문페이지
             menu_id=Menu.objects.get(menu_id=request.POST['menu_id'])
             name = Menu.objects.get(name=request.POST['name'])  # 제품이름 표시
@@ -155,6 +154,8 @@ def menu_detail(request,menu_id):  #주문서 페이지 들어가기
         else:
             form = OrderForm()
     else:
+        w2 = Order(order_id=newnum, time=datetime.datetime.now())  # DB order 생성
+        w2.save()
         if request.method == "POST":  # 주문페이지
             menu_id = Menu.objects.get(menu_id=request.POST['menu_id'])
             name = Menu.objects.get(name=request.POST['name'])  # 제품이름 표시
@@ -180,7 +181,8 @@ def menu_detail(request,menu_id):  #주문서 페이지 들어가기
     return render(request, 'mymenu/menu_detail.html',{'menu':menu_detail,'form':form,})
 
 def order_confirm(request, order_id):
-    if order_id == latestnum2:
-        global trynum
-        trynum+=1 #trynum은 프로그램 실행시 처음 사용자인지 여부 구별용도
+    global trynum,newnum
+    trynum += 1  # trynum은 프로그램 실행시 처음 사용자인지 여부 구별용도
+    if order_id == newnum:
+        newnum+=1
     return redirect('/mymenu/menu_list/',{"menu_list":menu_list})
