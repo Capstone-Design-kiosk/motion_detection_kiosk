@@ -1,22 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>LOGIN</title>
     <link type="text/css" rel="stylesheet" href="login.css"> <!--필수-->
+    <link rel="stylesheet" href="{% static 'css/mymenu/login.css' %}">
 </head>
-<body>
-     <div>
-            {% if form.errors %}
-            <p>아이디나 비밀번호가 맞지 않습니다.</p>
-            {% endif %}
 
-            login
-            <form method="POST" action="{% url 'login' %}">
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit">Login</button>
-            </form>
-        </div>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Login Form -->
+    <form method="post" action="{% url 'login' %}" class="sign-in-form">
+        {%csrf_token%}
+        {% if form.errors %}
+        <p>아이디 또는 비밀번호가 일치하지 않습니다.</p>
+        {% endif %}
+        <h1>관리자 로그인</h1>
+        <input type="text" id="{{ form.username.id_for_label }}" class="fadeIn second" name="{{ form.username.html_name }}" placeholder="ID">
+        <input type="text" id="{{ form.password.id_for_label }}" class="fadeIn third" name="{{ form.password.html_name }}" placeholder="Password">
+
+        <input type="submit" class="fadeIn fourth" value="로그인">
+
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>

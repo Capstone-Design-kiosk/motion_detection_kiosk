@@ -1,13 +1,14 @@
 html{
  background-color:#999;
  }
-
+p{
+font-size:30px;
+}
   #jb-container {
     width: 900px;
     height:1600px;
     margin: 0px auto;
     background-color:#000;
-
   }
   #jb-header {
     opacity: 0.5;
@@ -19,15 +20,11 @@ html{
     justify-content: center;
     background-color:#fff;
   }
-    #jb-ctg {
-    height:70px;
-    text-align: center;
-    background-color:#fff;
-  }
+
   #jb-content {
-    height:1100px;
+    height:1170px;
     width: 900px;
-    padding: 10px;
+    padding: 100px 10px;
     margin-bottom: 10px;
     float: left;
     display:inline;
@@ -37,71 +34,16 @@ html{
 
   }
   #jb-footer {
-    width: 500px;
-    height:300px;
+    width: 900px;
     clear: both;
     float: left;
     padding: 10px;
     border: 1px solid #bcbcbc;
     background-color:#fff;
   }
-  #jb-footerside {
-    width: 400px;
-    height:300px;
-    padding: 10px;
-    margin-bottom: 10px;
-    float: right;
-    border: 1px solid #bcbcbc;
-    background-color:#fff;
+  .default-fontsize{
+    font-size:25px;
   }
-  #fontsize{
-    font-size:50px;
-  }
-
-.ulstyle {
-	list-style:none;
-	float:left;
-	text-align: center
-}
-.pagebox{
-    padding: 25px;
-    margin-left: 375px;
-	color:#000;
-	font:bold 20px tahoma;
-	border:1px solid #111;
-	border-radius: 10px 10px 10px 10px;
-	text-align:center;
-	text-decoration:none;
-}
-.pagebox:hover{
-	color:#000;
-	border:1px solid #111;
-	background-color:#999;
-}
-
-
-.card{
-    width: 500px;
-    height:480px;
-    margin-bottom:20px;
-    border-radius: 50px;
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
-
-}
-
-.page{
-  list-style:none;
-  display: flex;
-  justify-content: center;
-}
-
-.default-fontsize{
-font-size:25px;
-}
-.default-fontsize2{
-font-size:35px;
-}
 
 .myButton {
 	box-shadow:inset 0px 11px 25px -43px #ffffff;
@@ -116,6 +58,7 @@ font-size:35px;
 	font-size:30px;
 	font-weight:bold;
 	padding:10px 40px;
+	margin-top:100px;
 }
 .myButton:hover {
 	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
@@ -125,3 +68,16 @@ font-size:35px;
 	position:relative;
 	top:1px;
 }
+a:link {
+    color: black;
+    text-decoration: none;
+}
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color:black;
+    text-decoration: none;
+}
+

@@ -23,7 +23,7 @@ def menu_list(request):
         Myorder = OrderList.objects.filter(order_num=latestnum2)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=latestnum2)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3) #9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4) #9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html', {"menu_list":menu_list, "Menus":Menus, "Myorder":Myorder,"Total":Total})
     else:#########################################결제하기 누른 이후 최신번호+1의 번호로 갱신되어 newnum사용(당일 두전째 사용자부터 그 이후)
@@ -32,17 +32,18 @@ def menu_list(request):
             order_num=newnum)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=newnum)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3)  # 9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4)  # 9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html',
                       {"menu_list": menu_list, "Menus": Menus, "Myorder": Myorder, "Total": Total})
+
 def menu_list_coldcoffee(request):
     if trynum == 0:  #########################################프로그램 처음 실행시 가장 최신 번호(당일 첫사용자)
         Menus = Menu.objects.filter(cat="COLD_COFFEE")
         Myorder = OrderList.objects.filter(order_num=latestnum2)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=latestnum2)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3)  # 9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4)  # 9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html',
                       {"menu_list": menu_list, "Menus": Menus, "Myorder": Myorder, "Total": Total})
@@ -52,7 +53,7 @@ def menu_list_coldcoffee(request):
             order_num=newnum)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=newnum)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3)  # 9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4)  # 9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html',
                       {"menu_list": menu_list, "Menus": Menus, "Myorder": Myorder, "Total": Total})
@@ -62,7 +63,7 @@ def menu_list_beverage(request):
         Myorder = OrderList.objects.filter(order_num=latestnum2)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=latestnum2)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3)  # 9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4)  # 9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html',
                       {"menu_list": menu_list, "Menus": Menus, "Myorder": Myorder, "Total": Total})
@@ -72,7 +73,7 @@ def menu_list_beverage(request):
             order_num=newnum)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=newnum)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3)  # 9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4)  # 9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html',
                       {"menu_list": menu_list, "Menus": Menus, "Myorder": Myorder, "Total": Total})
@@ -82,7 +83,7 @@ def menu_list_bake(request):
         Myorder = OrderList.objects.filter(order_num=latestnum2)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=latestnum2)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3)  # 9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4)  # 9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html',
                       {"menu_list": menu_list, "Menus": Menus, "Myorder": Myorder, "Total": Total})
@@ -92,7 +93,7 @@ def menu_list_bake(request):
             order_num=newnum)  # 장바구니 목록 나타냄(hash:object객체의 int값 반환)
         Total = Order.objects.filter(order_id=newnum)  # 최종가격 나타냄
         page = request.GET.get('page', 1)
-        paginator = Paginator(Menus, 3)  # 9로 변경해야함, 일단 확인차
+        paginator = Paginator(Menus, 4)  # 9로 변경해야함, 일단 확인차
         menu_list = paginator.get_page(page)
         return render(request, 'mymenu/menu_list.html',
                       {"menu_list": menu_list, "Menus": Menus, "Myorder": Myorder, "Total": Total})
@@ -186,3 +187,11 @@ def order_confirm(request, order_id):
     if order_id == newnum:
         newnum+=1
     return redirect('/mymenu/menu_list/',{"menu_list":menu_list})
+
+def order_delete(request, order_id):
+    order = get_object_or_404(OrderList, pk=order_id)
+    if order.order_num==newnum:
+        order.delete()
+    else:
+        order.delete()
+    return redirect('mymenu/menu_list/',{"menu_list":menu_list})

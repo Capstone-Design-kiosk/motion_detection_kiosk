@@ -52,7 +52,9 @@
 - pip install django
 - pip install opencv-python
 - pip install mysqlclient
-- python -m pip install Pillow(이미지 추가 위함)
+- python -m pip install Pillow
+- pip install tensorflow
+- pip install imutils
 
 ## DB
 ##### 테이블 이름: kiosk

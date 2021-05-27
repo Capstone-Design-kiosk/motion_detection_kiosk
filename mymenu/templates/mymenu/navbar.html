@@ -1,0 +1,12 @@
+{% url 'menu_list' as menu_list %}
+{% url 'menu_list_coldcoffee' as menu_list_coldcoffee %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bf-dark">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link {% request.path==menu_list %} active {% endif %}" href="{% url 'menu_list' %}">hot</a>
+            <a class="nav-item nav-link {% request.path==menu_list_coldcoffee %} active {% endif %}" href="{% url 'menu_list_coldcoffee' %}">hot</a>
+
+        </div>
+    </div>
+</nav>

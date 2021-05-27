@@ -1,13 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+    <title>관리자 페이지</title>
+
+    <style>
+        .raise:hover,
+        .raise:focus {
+          box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+          transform: translateY(-1.0em);
+          background: #777;
+        }
+
+        button {
+          color: var(--color);
+          transition: 0.25s;
+
+          &:hover,
+          &:focus {
+            border-color: var(--hover);
+            color: #000;
+          }
+        }
+
+        body {
+          color: #000;
+          font: 500 2.5em 'Fira Sans', sans-serif;
+          justify-content: center;
+          align-content: center;
+          align-items: center;
+          text-align: center;
+          min-height: 100vh;
+          display: flex;
+        }
+        button {
+          background: none;
+          border: 5px solid;
+          font: inherit;
+          font-weight: bold;
+          line-height: 1;
+          margin: 1em;
+          padding: 5em 3.5em;
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <a href="{% url 'login' %}">login</a>
-    <a href="{% url 'accounts:signup' %}">signup</a>
-
-
+<div class="buttons">
+    <button type="button" class="raise" onclick="location.href='/accounts/login/'">LOGIN</button>
+    <button type="button" class="raise" onclick="location.href='/accounts/signup/'">SIGNUP</button>
+</div>
 </body>
 </html>
