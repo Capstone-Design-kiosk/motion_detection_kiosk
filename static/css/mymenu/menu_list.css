@@ -1,0 +1,127 @@
+html{
+ background-color:#999;
+ }
+
+  #jb-container {
+    width: 900px;
+    height:1600px;
+    margin: 0px auto;
+    background-color:#000;
+
+  }
+  #jb-header {
+    opacity: 0.5;
+    height:150px;
+    width: 900px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#fff;
+  }
+    #jb-ctg {
+    height:70px;
+    text-align: center;
+    background-color:#fff;
+  }
+  #jb-content {
+    height:1100px;
+    width: 900px;
+    padding: 10px;
+    margin-bottom: 10px;
+    float: left;
+    display:inline;
+    border: 1px solid #bcbcbc;
+    text-align: center;
+    background-color:#fff;
+
+  }
+  #jb-footer {
+    width: 500px;
+    height:300px;
+    clear: both;
+    float: left;
+    padding: 10px;
+    border: 1px solid #bcbcbc;
+    background-color:#fff;
+  }
+  #jb-footerside {
+    width: 400px;
+    height:300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    float: right;
+    border: 1px solid #bcbcbc;
+    background-color:#fff;
+  }
+  #fontsize{
+    font-size:50px;
+  }
+
+.ulstyle {
+	list-style:none;
+	float:left;
+	text-align: center
+}
+.pagebox{
+    padding: 25px;
+    margin-left: 375px;
+	color:#000;
+	font:bold 20px tahoma;
+	border:1px solid #111;
+	border-radius: 10px 10px 10px 10px;
+	text-align:center;
+	text-decoration:none;
+}
+.pagebox:hover{
+	color:#000;
+	border:1px solid #111;
+	background-color:#999;
+}
+
+
+.card{
+    width: 500px;
+    height:480px;
+    margin-bottom:20px;
+    border-radius: 50px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
+
+}
+
+.page{
+  list-style:none;
+  display: flex;
+  justify-content: center;
+}
+
+.default-fontsize{
+font-size:25px;
+}
+.default-fontsize2{
+font-size:35px;
+}
+
+.myButton {
+	box-shadow:inset 0px 11px 25px -43px #ffffff;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#ededed;
+	border-radius:7px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#000;
+	font-family:Impact;
+	font-size:30px;
+	font-weight:bold;
+	padding:10px 40px;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	background-color:#dfdfdf;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

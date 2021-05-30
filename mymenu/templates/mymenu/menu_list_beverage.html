@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/mymenu/menu_list.css' %}">
+</head>
+<body>
+
+    <div class="left">
+      <div class="col-12">
+          {% if user.is_active %}
+          <a href="{% url 'logout' %}">logout</a><hr>
+          <a href="{% url 'menu_register' %}">메뉴등록하기</a><hr>
+          {% endif %}
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">제목</th>
+              <th scope="col">이미지</th>
+              <th scope="col">상세설명</th>
+              <th scope="col">가격</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for Menu in menu_list %}
+            <tr>
+              <th scope="row">{{ Menu.menu_id }}</th>
+            <td><a href="{% url 'menu_detail' Menu.menu_id %}">{{ Menu.name }}</a> </td>
+            <td>
+            {% if Menu.image %}
+                <img src="{{ Menu.image.url }}" width="100" height="100">
+            {% endif %}
+            </td>
+            <td>{{ Menu.des }}</td>
+             <td>{{ Menu.price }}</td>
+            </tr>
+            <!--delete-->
+          {% if user.is_active %}
+            <td class='menu_delete'>
+              <a href="{% url 'menu_delete' Menu.menu_id %}" onclick="return confirm('정말로 삭제하시겠습니까?')"> 삭제</a>
+            </td>
+            <td>
+            <a href="{% url 'menu_edit' Menu.menu_id %}">수정</a>
+            </td>
+          {% endif %}
+          {% endfor %}
+            </tbody>
+        </table>
+      </div>
+
+    <!--pagination-->
+    <div class="pagination">
+      {% if menu_list.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ menu_list.number|add:-1 }}">previous</a>
+          {% endif %}
+
+          {% for i in p_range %}
+              <a href="?page={{i}}" {% if menu_list.number == i %}class="active" {% endif %}>{{i}}</a>
+          {% endfor %}
+
+          {% if menu_list.has_next %}
+              <a href="?page={{ menu_list.number|add:+1  }}">next</a>
+              <a href="?page={{ menu_list.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+    </div>
+    </div>
+
+
+    <div class="right">
+        <div>
+        <img src = '{% url "feed" %}' width = "500px"  height = "300px">
+        </div>
+
+        <!-----------장바구니------------>
+        <table class="table">
+        <thread>
+        <th scope="col">제품번호</th>
+        <th scope="col">수량</th>
+        <th scope="col">가격</th>
+        <th scope="col">포장여부</th>
+        </thread>
+        <tbody>
+        {% for Orderlist in Myorder %}
+        <tr>
+            <td>{{ Orderlist.menu_num }}</td>
+            <td>{{ Orderlist.quantity }}</td>
+            <td>{{ Orderlist.price }}</td>
+            <td>{{ Orderlist.cup }}</td>
+        </tr>
+
+        {% endfor %}
+
+
+        </tbody>
+        <tbody>
+        {% for total in Total %}
+        <tr>
+            <th>최종가격:</th>
+            <td>{{ total.total_price }}</td>
+
+        </tr>
+        <td class='order_confirm'>
+              <a href="{% url 'order_confirm' total.order_id %}" onclick="return confirm('주문하시겠습니까?')"> 주문하기</a>
+        </td>
+        {% endfor %}
+
+
+        </tbody>
+
+        </table>
+    </div>
+
+
+</body>
+</html>

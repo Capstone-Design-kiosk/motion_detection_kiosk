@@ -1,0 +1,76 @@
+html{
+ background-color:#999;
+ }
+p{
+font-size:30px;
+}
+  #jb-container {
+    width: 900px;
+    height:1600px;
+    margin: 0px auto;
+    background-color:#000;
+  }
+  #jb-header {
+    opacity: 0.5;
+    height:150px;
+    width: 900px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#fff;
+  }
+
+  #jb-content {
+    height:1450px;
+    width: 900px;
+    padding: 100px 10px;
+    margin-bottom: 10px;
+    float: left;
+    display:inline;
+    border: 1px solid #bcbcbc;
+    text-align: center;
+    background-color:#fff;
+
+  }
+
+  .default-fontsize{
+    font-size:25px;
+  }
+
+.myButton {
+	box-shadow:inset 0px 11px 25px -43px #ffffff;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#ededed;
+	border-radius:7px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#000;
+	font-family:Impact;
+	font-size:30px;
+	font-weight:bold;
+	padding:10px 40px;
+	margin-top:100px;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	background-color:#dfdfdf;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+a:link {
+    color: black;
+    text-decoration: none;
+}
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color:black;
+    text-decoration: none;
+}
+

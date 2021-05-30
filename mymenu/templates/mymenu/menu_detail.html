@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/mymenu/menu_detail.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>메뉴</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
+    <script src="https://kit.fontawesome.com/3f81a216bd.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div style="background-color:#999;">
+    <div id="jb-container">
+        <div id="jb-header">
+            <img src="/../static/img/coffee.jpg" alt="배너" width="900px;">
+        </div>
+
+        <div id="jb-content">
+
+            <img src="{{ menu.image.url }}" width="500" height="300"><br><br>
+            <h1 style="font-weight: bold;">{{menu.name}}</h1>
+            <p>{{menu.des}}</p>
+            <p style="font-weight: bold;">{{menu.price}}원</p>
+
+            <br><br>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" id="menu_id" name="menu_id" value={{menu.menu_id}}>
+                <input type="hidden" id="name" name="name" value={{menu.name}}>
+                <input type="hidden" id="price" name="price" value={{menu.price}}>
+
+                {{form.as_p}}
+                <br>
+                <button type="submit" class="myButton"><i class="fas fa-shopping-basket" ></i> 장바구니</button>
+                <a class="myButton" href="{% url 'menu_list' %}">취소</a>
+            </form>
+        </div>
+
+        <div id="jb-footer">
+            <div>
+                <img src = '{% url "feed" %}' width = "300px"  height = "300px">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
