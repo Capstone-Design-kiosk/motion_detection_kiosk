@@ -220,7 +220,7 @@ class CameraNum(object):
                                 mapy = ((mapy + 1)*(rows - 1))/2
                                 distorted = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
 
-                                
+                                print(4)
                                 number = 4
 
                                 cv2.imshow("result", distorted)
