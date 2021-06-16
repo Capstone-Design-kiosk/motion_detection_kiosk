@@ -62,13 +62,13 @@
             <ul class="ulstyle " >
                 <div class="card" style="width: 24.5rem;" onclick="location.href='{% url 'menu_detail' Menu.menu_id %}'">
                     {% if Menu.image %}
-                    <img src="{{ Menu.image.url }}" class="card-img-top" alt="메뉴 이미지" width="500px" height="200px">
+                    <img src="{{ Menu.image.url }}" class="card-img-top" alt="메뉴 이미지" width="500px" height="250px">
                     {% endif %}
 
                     <div class="card-body" >
-                        <div class="card-text" align="center">
+                        <div class="card-text" align="center" >
                             <p style="font-size:35px; font-weight:bold;">{{ Menu.menu_id }}. {{ Menu.name }}</a></p>
-                            <p class="default-fontsize">{{ Menu.des }}</p>
+                            <p class="default-fontsize">{{ Menu.des|linebreaks|truncatechars:40}}</p>
                             <p style="font-size:28px; font-weight:bold;">{{ Menu.price }}원</p>
 
                             <!--delete-->
@@ -94,7 +94,7 @@
                 {% endfor %}
 
                 {% if menu_list.has_next %}
-                <li><a class="pagebox" href="?page={{ menu_list.number|add:+1  }}"> > </a></li>
+                <li><a class="pagebox" style="margin-right:200px" href="?page={{ menu_list.number|add:+1  }}"> > </a></li>
                 <!--<a href="?page={{ menu_list.paginator.num_pages }}">last &raquo;</a>-->
                 {% endif %}
             </ul>
@@ -119,6 +119,7 @@
                     <td>{{ Orderlist.quantity }}</td>
                     <td>{{ Orderlist.price }}</td>
                     <td>{{ Orderlist.cup }}</td>
+                    <td><a href="{% url 'order_delete' Orderlist.list_id %}"> 삭제</a></td>
                 </tr>
 
                 {% endfor %}

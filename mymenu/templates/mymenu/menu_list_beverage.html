@@ -92,6 +92,7 @@
             <td>{{ Orderlist.quantity }}</td>
             <td>{{ Orderlist.price }}</td>
             <td>{{ Orderlist.cup }}</td>
+            <td><a href="{% url 'order_delete' Orderlist.list_id %}"> 삭제</a></td>
         </tr>
 
         {% endfor %}

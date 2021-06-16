@@ -190,6 +190,15 @@ def menu_detail(request,menu_id):  #주문서 페이지 들어가기
             form = OrderForm()
     return render(request, 'mymenu/menu_detail.html',{'menu':menu_detail,'form':form,})
 
+def order_delete(request, list_id):
+    order = get_object_or_404(OrderList, pk=list_id)
+    order_num=hash(order.order_num)
+    order.delete() #선택한 주문 번호 삭제
+    sum = OrderList.objects.filter(order_num=order_num).aggregate(Sum('price')) #최종 가격 다시 더함
+    Order.objects.filter(order_id=order_num).update(total_price=sum['price__sum']) #주문서에 최종가격 다시 설정 후 출력
+
+    return redirect('menu_list')
+
 def order_confirm(request, order_id):
     global trynum,newnum
     trynum += 1  # trynum은 프로그램 실행시 처음 사용자인지 여부 구별용도

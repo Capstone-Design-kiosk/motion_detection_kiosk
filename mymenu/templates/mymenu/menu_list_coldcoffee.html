@@ -83,6 +83,7 @@
         <th scope="col">수량</th>
         <th scope="col">가격</th>
         <th scope="col">포장여부</th>
+        <td><a href="{% url 'order_delete' Orderlist.list_id %}"> 삭제</a></td>
         </thread>
         <tbody>
         {% for Orderlist in Myorder %}
