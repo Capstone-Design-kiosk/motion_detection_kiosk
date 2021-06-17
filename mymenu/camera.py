@@ -3,9 +3,16 @@ import cv2
 import numpy as np
 import os
 import pyautogui,autopy
+from django.http import HttpResponseRedirect, HttpRequest
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from django.urls import reverse
+
 from .models import Menu
+from .models import Order
+from .models import OrderList
+import webbrowser
+from .views import menu_list_beverage
 import time
 import math
 from matplotlib import pyplot as plt
@@ -21,11 +28,24 @@ for imPath in myList:
     image = cv2.imread(f'{folderPath}/{imPath}')
     # print(f'{folderPath}/{imPath}')
     overlayList.append(image)
-import webbrowser
-print(len(overlayList))
+
+
+trynum=0#프로그램 실행시 처음 사용자인지 여부 확인용
+try:
+    latestnum = OrderList.objects.latest('order_num')#가장 최신 주문번호
+    latestnum2=hash(latestnum.order_num)+1
+except OrderList.DoesNotExist:#맨처음 프로그램 실행시 order내용이 아예 없을 때
+    latestnum2=1
+newnum = latestnum2 + 1  # 결제하기 누르고 다음 사람을 위해 이어지는 주문번호
 class CAMERA(object):
     def urlconnect(request): #################페이지 전환
         print("들어옹냐")
+        request = HttpRequest()
+        response = menu_list_beverage(request)
+        # html = response.content.decode('utf8')
+        # print(response)
+        # redirect_to = reverse('menu_list_beverage')
+        # return HttpResponseRedirect(redirect_to)
         # print(Paginator.previous_page_number() )
         # webbrowser.open('http://127.0.0.1:8000/mymenu/menu_list/?page=Paginator.number|add:+1')
     def __init__(self):
