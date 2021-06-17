@@ -149,12 +149,12 @@ class CAMERA(object):
 
                                     cv2.circle(image, (x1, y1), 7, (255, 255, 255), cv2.FILLED)
                                     cv2.circle(image,(x2,y2),15,(255,0,255),cv2.FILLED) #원으로 표시
-                                if (lmList[0][1]-lmList[-1][1] >50):
+                                if (lmList[0][1]-lmList[-1][1] >30):
                                     print("<---")
                                     active = 0
                                     mode = 'N'
 
-                                elif(lmList[0][1]-lmList[-1][1] < -50 ):
+                                elif(lmList[0][1]-lmList[-1][1] < -30 ):
                                     print("--->")
                                     active = 0
                                     mode = 'N'
