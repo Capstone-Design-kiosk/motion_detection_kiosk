@@ -26,7 +26,7 @@ print(len(overlayList))
 class CAMERA(object):
     def urlconnect(request): #################페이지 전환
         print("들어옹냐")
-        print(Paginator.previous_page_number() )
+        # print(Paginator.previous_page_number() )
         # webbrowser.open('http://127.0.0.1:8000/mymenu/menu_list/?page=Paginator.number|add:+1')
     def __init__(self):
         cap = cv2.VideoCapture(0)
