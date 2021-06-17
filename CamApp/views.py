@@ -1,11 +1,8 @@
 from django.shortcuts import render
-from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 # from .camera import VideoCamera
-from mymenu.handnum import CameraNum
-from .camera import CAMERA
-import cv2
-import threading
+from mymenu.camera import CAMERA
+
 
 def index(request):
     return render(request, "CamApp/index.html")
@@ -16,6 +13,7 @@ def gen(camera): #영상화면 출력
         frame = camera.get_frame()
         yield(b'--frame\r\n'
               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
 
 
 def feed(request):

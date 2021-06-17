@@ -2,7 +2,7 @@
 - settings.py에서 본인의 DB로 설정
 
 # 수정 내용
-- 손가락인식:mediapipe,autopy 모듈 설치(CamApp/camera.py)
+- 손가락인식:mediapipe,autopy 모듈 설치(mymenu/camera.py)
 - 커서 인식:
   주먹:커서모드 전환
   보자기:커서모드 아웃
