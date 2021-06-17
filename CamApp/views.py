@@ -3,6 +3,7 @@ from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 # from .camera import VideoCamera
 from mymenu.handnum import CameraNum
+from .camera import CAMERA
 import cv2
 import threading
 
@@ -18,8 +19,11 @@ def gen(camera): #영상화면 출력
 
 
 def feed(request):
-    return StreamingHttpResponse(gen(CameraNum()),
+    return StreamingHttpResponse(gen(CAMERA()),
                                  content_type='multipart/x-mixed-replace; boundary=frame')
+    # # return StreamingHttpResponse(gen(CameraNum()),
+    #                              content_type='multipart/x-mixed-replace; boundary=frame')
+
 
 
 #
