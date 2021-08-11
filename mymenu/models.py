@@ -33,7 +33,7 @@ class OrderList(models.Model):
     menu_name = models.ForeignKey(Menu,to_field='name', related_name='menu_name', on_delete=models.CASCADE, db_column='menu_name')
     quantity = models.IntegerField(max_length=3)
     price = models.IntegerField(max_length=3)
-    cup=models.CharField(max_length=15)
+    cup=models.BooleanField()
  
     class Meta:
         managed = False
