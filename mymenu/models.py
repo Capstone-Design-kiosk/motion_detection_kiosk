@@ -34,7 +34,8 @@ class OrderList(models.Model):
     quantity = models.IntegerField(max_length=3)
     price = models.IntegerField(max_length=3)
     cup=models.BooleanField()
- 
+
+
     class Meta:
         managed = False
         db_table = 'order_list'

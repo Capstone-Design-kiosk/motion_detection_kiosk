@@ -34,12 +34,43 @@
         document.write(cnt)
       }
     </script>
+    <style>
+        .nav-link {
+          color: white;
+        }
+        .nav-link:hover {
+          color: #f7003a;
+        }
+        .nav-tabs
+        {
+        background-color:#FFA500;
+        }
+        .nav-item a:hover { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
+        background-color:#f7003a;
+        color: white;
+        }
+        .card:hover {
+          transform: translateY(-5px) scale(1.005) translateZ(0);
+          box-shadow: 1px 1px #FFA500, -1em 0 0.6em #FFA500;;,
+            0 24px 46px var(--box-shadow-color);
+          cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
+        }
+        .card:hover .overlay {
+          transform: scale(4) translateZ(0);
+        }
+        .page a:hover { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
+        background-color:#FFA500;
+        }
+        .myButton:hover {cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
+        }
+
+    </style>
 </head>
 <body>
 <div style="background-color:#999;">
-    <div id="jb-container">
-        <div id="jb-header">
-            <img src="../../static/img/coffee.jpg" alt="배너" width="900px;">
+    <div id="jb-container" >
+        <div id="jb-header" style="opacity: 100">
+            <img src="../../static/img/쿠비앤.png" alt="배너" width="900px;" >
         </div>
         <div id="jb-ctg">
             <ul class="nav nav-tabs">
@@ -92,10 +123,10 @@
             {% endfor %}
 
             <!--pagination-->
-            <ul class="page ulstyle" >
+            <ul class="page ulstyle">
                 {% if menu_list.has_previous %}
                 <!--<a href="?page=1">&laquo; first</a>-->
-                <li><a class="pagebox" href="?page={{ menu_list.number|add:-1 }}"> < </a></li>
+                <li><a class="pagebox"  href="?page={{ menu_list.number|add:-1 }}"> < </a></li>
                 {% endif %}
 
                 {% for i in p_range %}
@@ -103,7 +134,9 @@
                 {% endfor %}
 
                 {% if menu_list.has_next%}
-                <li><a class="pagebox" style="margin-right:200px" href="?page={{ menu_list.number|add:+1  }}"> > </a></li>
+                <li><a  class="pagebox" href="?page={{ menu_list.number|add:+1  }}"> > </a></li>
+                {% elif num == True %}
+                <li><a class="pagebox"  href="?page={{ menu_list.number|add:+1  }}"> > </a></li>
                 <!--<a href="?page={{ menu_list.paginator.num_pages }}">last &raquo;</a>-->
                 {% endif %}
             </ul>
@@ -141,7 +174,7 @@
                 <p>최종가격:
 
                     {{ total.total_price }}</p>
-                <div style="margin-left:200px;">
+                <div style="margin-left:200px;" class="order">
                     <a href="{% url 'order_confirm' total.order_id %}" onclick="return confirm('주문하시겠습니까?')">
                         <button class="myButton"><i class="fas fa-credit-card"></i> 주문하기</button></a>
 

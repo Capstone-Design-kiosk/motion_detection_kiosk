@@ -15,6 +15,7 @@ class Menu(models.Model):
         managed = False
         db_table = 'menu'
 
+
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True,)
     time = models.DateTimeField(auto_now_add=True)

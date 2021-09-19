@@ -16,7 +16,7 @@ class OrderForm(forms.ModelForm):
         #     ('TOGO', 'TOGO'),
         # )
         # widgets = {
-        #     'age': forms.Select(choices=CUP_CHOICES, attrs={'class': 'form-control'}),
+        #     'cup': forms.CheckboxSelectMultiple,
         # }
         labels = {
             'quantity': '수량',
