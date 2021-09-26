@@ -204,4 +204,4 @@ def order_confirm(request, order_id):
     trynum += 1  # trynum은 프로그램 실행시 처음 사용자인지 여부 구별용도
     if order_id == newnum:
         newnum+=1
-    return redirect('/mymenu/menu_list/',{"menu_list":menu_list})
+    return redirect('/',{"menu_list":menu_list})

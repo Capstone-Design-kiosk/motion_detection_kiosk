@@ -31,6 +31,25 @@
             zoom: 3.0;
         }
     </style>
+    {% comment %} <script>
+        function count(type)  {
+            // 결과를 표시할 element
+            const resultElement = document.getElementById('result');
+            
+            // 현재 화면에 표시된 값
+            let number = resultElement.innerText;
+            
+            // 더하기/빼기
+            if(type === 'plus') {
+                number = parseInt(number) + 1;
+            }else if(type === 'minus')  {
+                number = parseInt(number) - 1;
+            }
+            
+            // 결과 출력
+            resultElement.innerText = number;
+        }
+    </script> {% endcomment %}
 </head>
 
 <body>
@@ -53,6 +72,15 @@
                 <input type="hidden" id="menu_id" name="menu_id" value={{menu.menu_id}}>
                 <input type="hidden" id="name" name="name" value={{menu.name}}>
                 <input type="hidden" id="price" name="price" value={{menu.price}}>
+
+                {% comment %} <input type="button" id="quantity" name="quantity" onclick="count("plus")" value={{OrderList.quantity}}> {% endcomment %}
+                {% comment %} <input type='button' id="quantity"  name="quantity" onclick='count("plus")' value='+'/>
+                <input type='button' id="quantity"  name="quantity" onclick='count("minus")' value='-'/>
+                <div id='result'>0</div> {% endcomment %}
+                
+                {% comment %} <input type=text id="quantity" name=amount value=1>
+                <input type=button value="+" onClick="javascript:this.form.amount.value++;">
+                <input type=button value="-" onClick="javascript:this.form.amount.value--;"> {% endcomment %}
 
                 {{form.as_p}}
                 <br>

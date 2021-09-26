@@ -71,9 +71,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kiosk',
         'USER': 'root',
-        'PASSWORD': '038062',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '3308',
         'OPTIONS': {
          "init_command": "SET foreign_key_checks = 0;",
         },
@@ -131,7 +131,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL='/mymenu/menu_list' #로그인 성공시 menu_list.html로 이동
+LOGIN_REDIRECT_URL='/' #로그인 성공시 menu_list.html로 이동
 LOGOUT_REDIRECT_URL='index'
 
 AUTH_USER_MODEL='auth.User'

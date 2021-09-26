@@ -31,7 +31,7 @@ class OrderList(models.Model):
     order_num = models.ForeignKey(Order, on_delete=models.DO_NOTHING, db_column='order_num')
     menu_num = models.ForeignKey(Menu, related_name='menu_num', on_delete=models.CASCADE, db_column='menu_num')
     menu_name = models.ForeignKey(Menu,to_field='name', related_name='menu_name', on_delete=models.CASCADE, db_column='menu_name')
-    quantity = models.IntegerField(max_length=3)
+    quantity = models.PositiveIntegerField(default=1)
     price = models.IntegerField(max_length=3)
     cup=models.BooleanField()
 
