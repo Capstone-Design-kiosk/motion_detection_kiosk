@@ -1,7 +1,7 @@
-html,body{
+html{
  background-color:#999;
-
  }
+
   #jb-container {
     width: 900px;
     height:1600px;
@@ -19,11 +19,12 @@ html,body{
     justify-content: center;
     background-color:#fff;
   }
-    #jb-ctg {
-    height:70px;
-    text-align: center;
-    background-color:#fff;
-  }
+      #jb-ctg {
+        height:70px;
+        width:900px;
+        text-align: center;
+        background-color:#fff;
+      }
   #jb-content {
     height:1100px;
     width: 900px;
@@ -59,13 +60,11 @@ html,body{
   }
 
 .ulstyle {
-
 	list-style:none;
 	float:left;
 	text-align: center
 }
 .pagebox{
-
     padding: 25px;
     margin-left: 375px;
 	color:#000;
@@ -83,7 +82,6 @@ html,body{
 
 
 .card{
-
     width: 500px;
     height:480px;
     margin-bottom:20px;
@@ -92,6 +90,7 @@ html,body{
   box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
 
 }
+
 .page{
   list-style:none;
   display: flex;
@@ -112,6 +111,7 @@ font-size:35px;
 	border-radius:7px;
 	border:1px solid #dcdcdc;
 	display:inline-block;
+	cursor:pointer;
 	color:#000;
 	font-family:Impact;
 	font-size:30px;
@@ -121,12 +121,8 @@ font-size:35px;
 .myButton:hover {
 	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
 	background-color:#dfdfdf;
-
 }
 .myButton:active {
 	position:relative;
 	top:1px;
 }
-
-
-

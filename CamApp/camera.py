@@ -41,7 +41,7 @@ class CAMERA(object):
         cap = cv2.VideoCapture(0)
         # cap = cv2.VideoCapture(1) #웹캠으로 연결시
         active = 0
-        joint_list = [[4,3,2,180],[8,7,6,180], [12, 10,9,180], [16, 14, 13,180], [20, 18, 17,180]]#엄지부터 새끼손가락까지(관절1,2,3,각도)
+        joint_list = [[3,2,1,180],[8,7,6,180], [12, 10,9,180], [16, 14, 13,180], [20, 18, 17,180]]#엄지부터 새끼손가락까지(관절1,2,3,각도)
         def draw_finger_angles(image, results, joint_list):  # 손가락 각도
 
             # Loop through hands
@@ -59,7 +59,7 @@ class CAMERA(object):
                         angle = 360 - angle
                     k=joint_list.index(joint)
                     joint_list[k][3]=angle
-                    print("joint",joint,k,angle)
+                    # print("joint",joint,k,angle) ############각 관절의 각도 확인용
                     cv2.putText(image, str(round(angle, 2)), tuple(np.multiply(b, [640, 480]).astype(int)),
                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
             return image
@@ -168,8 +168,6 @@ class CAMERA(object):
                             X = int(np.interp(x1, [110, 620], [0, w - 1]))
                             Y = int(np.interp(y1, [20, 350], [0, h - 1]))
                             cv2.circle(image, (lmList[8][1], lmList[8][2]), 7, (255, 255, 255), cv2.FILLED)
-                            cv2.circle(image, (lmList[4][1], lmList[4][2]), 10, (0, 255, 0),
-                                       cv2.FILLED)  # thumb
 
                             if X % 2 != 0:
                                 X = X - X % 2
@@ -177,7 +175,7 @@ class CAMERA(object):
                                 Y = Y - Y % 2
                             # print(X, Y)
                             autopy.mouse.move(X, Y)
-                            if idx == 0 and mode=='Cursor':
+                            if (joint_list[0][3] < 170 and joint_list[1][3] < 175 and joint_list[2][3]< 175 and joint_list[3][3]< 175 and joint_list[4][3] < 175) and mode=='Cursor':
                                 mode = ''
                                 cv2.circle(image, (lmList[8][1], lmList[8][2]), 10, (0, 0, 255),
                                            cv2.FILLED)  # thumb
@@ -186,17 +184,17 @@ class CAMERA(object):
                                 print("커서모드선택")
 
 ###################################################숫자 모드########################################################################
-                    if totalFingers==1 and (joint_list[0][3] < 160 and joint_list[1][3] < 170 and joint_list[2][3] < 50 and joint_list[3][3] < 50 and joint_list[4][3] < 50): ###############숫자 1 구부리면 선택가능
+                    if totalFingers==1 and (joint_list[0][3] <150  and joint_list[1][3] < 174 and joint_list[2][3] < 50 and joint_list[3][3] < 50 and joint_list[4][3] < 50): ###############숫자 1 구부리면 선택가능
                         print("1클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                         # autopy.mouse.move(692, 320)  #x,y값 넣으면됨
                         # autopy.mouse.click()
 
-                    if totalFingers == 2 and ((joint_list[0][3] > 160 and joint_list[1][3] < 175 )and joint_list[2][3]< 50  and joint_list[3][3] < 50 and joint_list[4][3] < 50):###############숫자 2 구부리면 선택가능
+                    if totalFingers == 2 and ((joint_list[0][3] < 170 or joint_list[1][3] < 175 )and joint_list[2][3]< 50  and joint_list[3][3] < 50 and joint_list[4][3] < 50):###############숫자 2 구부리면 선택가능
                         print("2클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                         # autopy.mouse.move(692, 320)
                         # autopy.mouse.click()
 
-                    if totalFingers == 3 and (joint_list[0][3] > 150 and joint_list[1][3] < 175 and joint_list[2][3]< 170 and joint_list[3][3]< 50 and joint_list[4][3] < 50):###############숫자 3 구부리면 선택가능
+                    if totalFingers == 3 and ((joint_list[0][3] < 170  or joint_list[1][3] < 175 or joint_list[2][3]< 170 )and joint_list[3][3]< 50 and joint_list[4][3] < 50):###############숫자 3 구부리면 선택가능
                         print("3클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                         # autopy.mouse.move(692, 320)
                         # autopy.mouse.click()

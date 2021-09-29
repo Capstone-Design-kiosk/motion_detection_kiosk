@@ -36,18 +36,19 @@
     </script>
     <style>
         .nav-link {
-          color: white;
+            color: white;
         }
         .nav-link:hover {
-          color: #f7003a;
+            color: #f7003a;
         }
         .nav-tabs
         {
-        background-color:#FFA500;
+            background-color:#FFA500;
         }
-        .nav-item a:hover { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
-        background-color:#f7003a;
-        color: white;
+        .nav-item a:hover {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
+            background-color:#f7003a;
+            color: white;
         }
         .card:hover {
           transform: translateY(-5px) scale(1.005) translateZ(0);
@@ -58,10 +59,12 @@
         .card:hover .overlay {
           transform: scale(4) translateZ(0);
         }
-        .page a:hover { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
-        background-color:#FFA500;
+        .page a:hover {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
+            background-color:#FFA500;
         }
-        .myButton:hover {cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
+        .myButton:hover {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆🏻</text></svg>") 16 0, auto;
         }
 
     </style>
@@ -72,7 +75,7 @@
         <div id="jb-header" style="opacity: 100">
             <img src="../../static/img/쿠비앤.png" alt="배너" width="900px;" >
         </div>
-        <div id="jb-ctg">
+        <div id="jb-ctg" style="height:70px;text-align: center;width:900px;">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link default-fontsize2" aria-current="page" href="{% url 'menu_list' %}">HOT</a>
@@ -173,9 +176,7 @@
             </table>
             <div>
                 {% for total in Total %}
-                <p>최종가격:
-
-                    {{ total.total_price }}</p>
+                <p>최종가격: {{ total.total_price }}</p>
                 <div style="margin-left:200px;" class="order">
                     <a href="{% url 'order_confirm' total.order_id %}" onclick="return confirm('주문하시겠습니까?')">
                         <button class="myButton"><i class="fas fa-credit-card"></i> 주문하기</button></a>
