@@ -67,7 +67,7 @@ class CAMERA(object):
         with mp_hands.Hands(max_num_hands=max_num_hands,min_detection_confidence=0.8,min_tracking_confidence=0.5) as hands:
 
             while cap.isOpened():
-                mode = ''
+                mode = 'N'
                 ret, frame = cap.read()
                 # BGR 2 RGB
                 image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -161,51 +161,76 @@ class CAMERA(object):
                         draw_finger_angles(image, results, joint_list)
 
 ###################################################커서 모드########################################################################
-                    if (idx==5 or totalFingers==5):
+                    print(mode, active)
+                    if (idx==5 ) and mode == 'N':  # 손바닥 다피면 커서모드 전환
+                        print("dddddddddd",mode,active)
                         mode = 'Cursor'
-                        if len(lmList) != 0:
-                            x1, y1 = lmList[0][1], lmList[0][2]
-                            w, h = autopy.screen.size()
-                            X = int(np.interp(x1, [110, 620], [0, w - 1]))
-                            Y = int(np.interp(y1, [20, 350], [0, h - 1]))
-                            cv2.circle(image, (lmList[8][1], lmList[8][2]), 7, (255, 255, 255), cv2.FILLED)
+                    if mode == 'Cursor':
+                        active = 1
+                        cv2.rectangle(image, (30, 20), (620, 470), (255, 255, 255), 3)
+                        print(mode)
+                        if idx==0 or totalFingers==0:  # 손가락 다피면  커서모드에서 나감
+                            active = 0
+                            mode = 'N'
+                            print(mode)
+                        else:
+                            if len(lmList) != 0:
+                                x1, y1 = lmList[0][1], lmList[0][2]
+                                w, h = autopy.screen.size()
+                                X = int(np.interp(x1, [110, 620], [0, w - 1]))
+                                Y = int(np.interp(y1, [20, 350], [0, h - 1]))
+                                cv2.circle(image, (lmList[8][1], lmList[8][2]), 7, (255, 255, 255), cv2.FILLED)
 
-                            if X % 2 != 0:
-                                X = X - X % 2
-                            if Y % 2 != 0:
-                                Y = Y - Y % 2
-                            # print(X, Y)
-                            autopy.mouse.move(X, Y)
-                            time.sleep(random.uniform(0.0005, 0.0005))
-                            if (joint_list[0][3] < 170 and joint_list[1][3] < 175 and joint_list[2][3]< 175 and joint_list[3][3]< 175 and joint_list[4][3] < 175) and mode=='Cursor':
-                                mode = ''
-                                cv2.circle(image, (lmList[8][1], lmList[8][2]), 10, (0, 0, 255),
-                                           cv2.FILLED)  # thumb
+                                if X % 2 != 0:
+                                    X = X - X % 2
+                                if Y % 2 != 0:
+                                    Y = Y - Y % 2
+                                # print(X, Y)
+                                autopy.mouse.move(X, Y)
                                 time.sleep(random.uniform(0.0005, 0.0005))
-                                autopy.mouse.click()
+                                if (130 < joint_list[0][3] < 170 or joint_list[1][3] < 175 and joint_list[2][
+                                    3] < 175 and joint_list[3][3] < 175 and joint_list[4][
+                                        3] < 175) and mode == 'Cursor':
+                                    mode = ''
+                                    cv2.circle(image, (lmList[8][1], lmList[8][2]), 10, (0, 0, 255),
+                                               cv2.FILLED)  # thumb
+                                    time.sleep(random.uniform(0.0005, 0.0005))
+                                    autopy.mouse.click()
 
-                                print("커서모드선택")
+                                    print("커서모드선택")
+
+
 
 ###################################################숫자 모드########################################################################
-                    if totalFingers==1 and (joint_list[0][3] <150  and joint_list[1][3] < 174 and joint_list[2][3] < 50 and joint_list[3][3] < 50 and joint_list[4][3] < 50): ###############숫자 1 구부리면 선택가능
-                        print("1클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                        # autopy.mouse.move(692, 320)  #x,y값 넣으면됨
-                        # autopy.mouse.click()
+                    print(totalFingers,mode)
+                    if mode == 'N':
+                        active = 1
+                        cv2.rectangle(image, (30, 20), (620, 470), (255, 255, 255), 3)
+                        if totalFingers==1 and (joint_list[0][3] <150  and joint_list[1][3] < 174 and joint_list[2][3] < 50 and joint_list[3][3] < 50 and joint_list[4][3] < 50): ###############숫자 1 구부리면 선택가능
+                            print("1클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",mode)
+                            autopy.mouse.move(692, 320)  #x,y값 넣으면됨
+                            autopy.mouse.click()
 
-                    if totalFingers == 2 and ((joint_list[0][3] < 170 or joint_list[1][3] < 175 )and joint_list[2][3]< 50  and joint_list[3][3] < 50 and joint_list[4][3] < 50):###############숫자 2 구부리면 선택가능
-                        print("2클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                        # autopy.mouse.move(692, 320)
-                        # autopy.mouse.click()
+                        if totalFingers == 2 and ((150<joint_list[0][3] < 170 and joint_list[1][3] < 176 )and joint_list[2][3]< 50  and joint_list[3][3] < 50 and joint_list[4][3] < 50):###############숫자 2 구부리면 선택가능
+                            print("2클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                            autopy.mouse.move(862,366)
+                            autopy.mouse.click()
 
-                    if totalFingers == 3 and ((joint_list[0][3] < 170  or joint_list[1][3] < 175 or joint_list[2][3]< 170 )and joint_list[3][3]< 50 and joint_list[4][3] < 50):###############숫자 3 구부리면 선택가능
-                        print("3클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                        # autopy.mouse.move(692, 320)
-                        # autopy.mouse.click()
+                        if totalFingers == 3 and ((150<joint_list[0][3] < 170  or joint_list[1][3] < 175 or joint_list[2][3]< 170 )and joint_list[3][3]< 50 and joint_list[4][3] < 50):###############숫자 3 구부리면 선택가능
+                            print("3클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                            autopy.mouse.move(686,588)
+                            autopy.mouse.click()
 
-                    if totalFingers == 4 and (joint_list[0][3] < 120 and joint_list[1][3] < 170 and joint_list[2][3]< 170 and joint_list[3][3]< 170 and joint_list[4][3] < 170) :  ###############숫자 4 구부리면 선택가능
-                        print("4클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                        # autopy.mouse.move(692, 320)
-                        # autopy.mouse.click()
+                        if totalFingers == 4 and (joint_list[0][3] < 150 and joint_list[1][3] < 170 and joint_list[2][3]< 170 and joint_list[3][3]< 170 and joint_list[4][3] < 170) :  ###############숫자 4 구부리면 선택가능
+                            print("4클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                            autopy.mouse.move(862, 588)
+                            autopy.mouse.click()
+
+                        if idx==10: ################okay
+                            print("okay")
+                            autopy.mouse.move(680,784)
+                            autopy.mouse.click()
+
 
                 #########################################            출력        #########################################
 
