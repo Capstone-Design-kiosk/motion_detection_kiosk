@@ -1,6 +1,12 @@
 # 사용시
 - settings.py에서 본인의 DB로 설정
 
+
+# Google MediaPipe for Hand Motion
+
+![image10](https://user-images.githubusercontent.com/48480825/135270357-eeb7d2d6-6295-4043-bfe5-4cb84fb44404.gif)
+<img src="https://user-images.githubusercontent.com/48480825/135275212-2d0f3ba0-0d36-4e4f-8139-6842585a038d.gif" width="500" height="320">
+
 # 수정 내용
 - 메뉴번호를 페이지별 카테고리별 1번 부터 시작하도록 수정
 - 포장 여부 선택 checkbox로 변경
@@ -16,8 +22,9 @@ cf)
 - 스와이프(2,3 손가락 붙여서 둘 사이 각도 0이면 스와이프 모드로 변환)
 
 # 문제점
-- 숫자 3을 (1,2,3) 손가락펴야함 (2,3,4) 피면 4로 인식됨
-
+- < >페이지 넘김 바 위치 조정 필요
+- 선택 쉽게 크기 다 크게
+- 
 
 # 현재 완료
 - 카메라 html에 스트리밍
