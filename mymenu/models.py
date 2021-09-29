@@ -39,4 +39,3 @@ class OrderList(models.Model):
     class Meta:
         managed = False
         db_table = 'order_list'
-
