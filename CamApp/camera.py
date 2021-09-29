@@ -65,6 +65,7 @@ class CAMERA(object):
             return image
 
         with mp_hands.Hands(max_num_hands=max_num_hands,min_detection_confidence=0.8,min_tracking_confidence=0.5) as hands:
+
             while cap.isOpened():
                 mode = ''
                 ret, frame = cap.read()
@@ -163,7 +164,7 @@ class CAMERA(object):
                     if (idx==5 or totalFingers==5):
                         mode = 'Cursor'
                         if len(lmList) != 0:
-                            x1, y1 = lmList[5][1], lmList[5][2]
+                            x1, y1 = lmList[0][1], lmList[0][2]
                             w, h = autopy.screen.size()
                             X = int(np.interp(x1, [110, 620], [0, w - 1]))
                             Y = int(np.interp(y1, [20, 350], [0, h - 1]))
@@ -175,12 +176,14 @@ class CAMERA(object):
                                 Y = Y - Y % 2
                             # print(X, Y)
                             autopy.mouse.move(X, Y)
+                            time.sleep(random.uniform(0.0005, 0.0005))
                             if (joint_list[0][3] < 170 and joint_list[1][3] < 175 and joint_list[2][3]< 175 and joint_list[3][3]< 175 and joint_list[4][3] < 175) and mode=='Cursor':
                                 mode = ''
                                 cv2.circle(image, (lmList[8][1], lmList[8][2]), 10, (0, 0, 255),
                                            cv2.FILLED)  # thumb
-                                autopy.mouse.click()
                                 time.sleep(random.uniform(0.0005, 0.0005))
+                                autopy.mouse.click()
+
                                 print("커서모드선택")
 
 ###################################################숫자 모드########################################################################
