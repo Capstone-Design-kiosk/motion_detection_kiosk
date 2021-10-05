@@ -8,7 +8,7 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  height: 100vh;
+  height: 70vh;
 }
 
 a {
@@ -51,7 +51,7 @@ ul{
   background: #fff;
   padding: 30px;
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   position: relative;
   padding: 50px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
