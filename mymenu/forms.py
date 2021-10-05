@@ -15,12 +15,13 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = OrderList
         fields = {'quantity', 'cup', }
-        # q_num = [(q_num, q_num) for q_num in range(1, 50)]
-        # CUP_CHOICES = (
-        #     ('', '포장 여부 선택'),
-        #     ('HERE', 'HERE'),  # First one is the value of select option and second is the displayed value in option
-        #     ('TOGO', 'TOGO'),
-        # )
+        # # q_num = [(q_num, q_num) for q_num in range(1, 50)]
+        # q_num = [('minu','-'),('plus','+')]
+        # # CUP_CHOICES = (
+        # #     ('', '포장 여부 선택'),
+        # #     ('HERE', 'HERE'),  # First one is the value of select option and second is the displayed value in option
+        # #     ('TOGO', 'TOGO'),
+        # # )
         # widgets = {
         #     'quantity': forms.Select(choices=q_num)
         # }
