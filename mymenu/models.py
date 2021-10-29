@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Menu(models.Model):
     menu_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=100, unique=True)
     image = models.ImageField(blank=True, upload_to="image", null=True)
     des = models.TextField()
     price = models.CharField(max_length=15)
