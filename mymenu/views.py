@@ -120,7 +120,7 @@ def menu_register(request):
 def menu_delete(request, menu_id):
     menu = get_object_or_404(Menu, pk=menu_id)
     menu.delete()
-    return redirect('mymenu/menu_list/',{"menu_list":menu_list})
+    return redirect('menu_list')
 
 def menu_edit(request, menu_id):
     menu=get_object_or_404(Menu, pk=menu_id)

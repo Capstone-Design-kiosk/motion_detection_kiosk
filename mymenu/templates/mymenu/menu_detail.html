@@ -76,12 +76,13 @@
         height: 3rem;
         margin: 0;
         position: relative;
+
         }
 
         .number-input button:after {
         display: inline-block;
         position: absolute;
-        font-family: "Font Awesome 5 Free"; 
+        font-family: "Font Awesome 5 Free";
         font-weight: 900;
         content: '\f077';
         transform: translate(-50%, -50%) rotate(180deg);
@@ -91,13 +92,14 @@
         }
 
         .number-input input[type=number] {
+
         font-family: sans-serif;
         max-width: 8rem;
         padding: .5rem;
         border: solid #ddd;
         border-width: 0 2px;
-        font-size: 2rem;
-        height: 3rem;
+        font-size: 3rem;
+        height: 4rem;
         font-weight: bold;
         text-align: center;
 
@@ -116,11 +118,17 @@
         </div>
 
         <div id="jb-content">
+            <div id="main">
+                <div id="left" style="position: fixed;">
+                    <img src="{{ menu.image.url }}" style="width:300px;height:200px"><br><br>
+                </div>
+                <div id="right" style="margin-left:100px;"><h1 style="font-weight: bold;">{{menu.name}}</h1></div>
+            </div>
+            <div style="margin-top:200px">
+                <p>{{menu.des|linebreaks}}</p>
+                <p style="font-weight: bold;">{{menu.price}}원</p>
+            </div>
 
-            <img src="{{ menu.image.url }}" width="500" height="300"><br><br>
-            <h1 style="font-weight: bold;">{{menu.name}}</h1>
-            <p>{{menu.des|linebreaks}}</p>
-            <p style="font-weight: bold;">{{menu.price}}원</p>
 
             <br><br>
             <form method="POST" enctype="multipart/form-data">
@@ -130,16 +138,16 @@
                 <input type="hidden" id="price" name="price" value={{menu.price}}>
 
                 <div>
-                    <p>포장여부 : 
+                    <p style="font-weight:bold">포장여부 :
                     {{form.cup}}
                     </p>
                 </div>
-                
-                <p>수량 : 
+                <br>
+                <p style="font-weight:bold">수량 :
                 <div class="number-input"> 
-                    <input type='button' onclick="this.parentNode.querySelector('input[type=number]').stepDown()"value='-'/>
+                    <input type='button' style="width:80px;height:80px;font-size:40px;font-weight:bold;text-align:center;" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"value='-'/>
                     {{form.quantity}}
-                    <input type='button'onclick="this.parentNode.querySelector('input[type=number]').stepUp()" value='+'/>
+                    <input type='button'style="width:80px;height:80px;font-size:40px;font-weight:bold;text-align:center;" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" value='+'/>
                 </div>
                 </p>
                
