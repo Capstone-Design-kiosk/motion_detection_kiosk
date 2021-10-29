@@ -149,7 +149,7 @@
         </div>
 
 
-        <div id="jb-footer" style="font-size:18px;">
+        <div id="jb-footer" style="font-size:18px;width:620px">
 
             <!-----------장바구니------------>
             <table class="table">
@@ -176,12 +176,7 @@
             </table>
             <div>
                 {% for total in Total %}
-                <p>최종가격: {{ total.total_price }}</p>
-                <div style="margin-left:200px;" class="order">
-                    <a href="{% url 'order_confirm' total.order_id %}" onclick="return confirm('주문하시겠습니까?')">
-                        <button class="myButton"><i class="fas fa-credit-card"></i> 주문하기</button></a>
-
-                </div>
+                <p style="font-size:30px;float:right">최종가격: {{ total.total_price }}</p>
                 {% endfor %}
 
             </div>
@@ -189,11 +184,17 @@
 
 
         </div>
-        <div id="jb-footerside">
-
+        <div id="jb-footerside" style="width:280px">
             <!------------------카메라------------------->
             <div>
-                <img src = '{% url "feed" %}' width = "350px"  height = "200px">
+                <div>
+                {% for total in Total %}
+                <div class="order">
+                    <a href="{% url 'order_confirm' total.order_id %}" >
+                        <button class="myButton" style="height:270px;float: center;"><i class="fas fa-credit-card"></i> 주문하기</button></a>
+                </div>
+                {% endfor %}
+                <img src = '{% url "feed" %}' width = "50px"  height = "200px">
             </div>
         </div>
 

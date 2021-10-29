@@ -185,7 +185,7 @@ class CAMERA(object):
                                     X = X - X % 2
                                 if Y % 2 != 0:
                                     Y = Y - Y % 2
-                                # print(X, Y)
+                                print(X, Y)
                                 autopy.mouse.move(X, Y)
                                 time.sleep(random.uniform(0.0005, 0.0005))
                                 if (130 < joint_list[0][3] < 170 or joint_list[1][3] < 175 and joint_list[2][
@@ -226,12 +226,11 @@ class CAMERA(object):
                             autopy.mouse.move(862, 588)
                             autopy.mouse.click()
 
-                        if idx==10: ################okay
-                            print("okay")
-                            autopy.mouse.move(680,784)
-                            autopy.mouse.click()
-
-
+###################################################숫자 모드########################################################################
+                    if (idx==10 ):  # 손바닥 다피면 커서모드 전환
+                        print("okay")
+                        autopy.mouse.move(896,800)
+                        autopy.mouse.click()
                 #########################################            출력        #########################################
 
                 cv2.imshow('HAND GESTURE', image)
