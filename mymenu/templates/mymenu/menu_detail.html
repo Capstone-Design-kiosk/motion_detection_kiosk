@@ -132,7 +132,7 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" id="menu_id" name="menu_id" value={{menu.menu_id}}>
-                <input type="hidden" id="name" name="name" value={{menu.name}}>
+                <input type="hidden" id="name" name="name" value="{{menu.name}}">
                 <input type="hidden" id="price" name="price" value={{menu.price}}>
 
                 <div>
