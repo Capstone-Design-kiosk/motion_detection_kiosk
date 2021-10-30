@@ -7,33 +7,44 @@ import os
 import pyautogui, autopy
 import random
 import time
-
+from tensorflow.keras.models import load_model
 max_num_hands = 1
-gesture = {
-    0:'number', 1:'one', 2:'two', 3:'three', 4:'four', 5:'cursor',
-    6:'six', 7:'rock', 8:'spiderman', 9:'two', 10:'ok',
+classes = {
+    0:'number',10:'ok',1:'one',2:'two',3:'three',4:'four',5:'cursor',
 }
-rps_gesture = {0:'number',5:'cursor',10:'ok'}
-active = 0
-mp_drawing = mp.solutions.drawing_utils
+# MediaPipe hands model
 mp_hands = mp.solutions.hands
-folderPath = "FingerImages"  # 손가락 번호 이미지
-myList = os.listdir(folderPath)
-tipIds = [4, 8, 12, 16, 20]  # 손가락 5개 번호
-overlayList = []
-fingernum=-1
-for imPath in myList:
-    image = cv2.imread(f'{folderPath}/{imPath}')
-    # print(f'{folderPath}/{imPath}')
-    overlayList.append(image)
+mp_drawing = mp.solutions.drawing_utils
+hands = mp_hands.Hands(
+    max_num_hands=max_num_hands,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5)
 
 # Gesture recognition model
-file = np.genfromtxt('CamApp/gesture_train.csv', delimiter=',')
-angle = file[:,:-1].astype(np.float32)
-label = file[:, -1].astype(np.float32)
-knn = cv2.ml.KNearest_create() #최근접 알고리즘을 통해 학습
-
-knn.train(angle, cv2.ml.ROW_SAMPLE, label)
+model = load_model('CamApp/hand.h5')
+active = 0
+tipIds = [4, 8, 12, 16, 20]  # 손가락 5개 번호
+overlayList = []
+# active = 0
+# mp_drawing = mp.solutions.drawing_utils
+# mp_hands = mp.solutions.hands
+# folderPath = "FingerImages"  # 손가락 번호 이미지
+# myList = os.listdir(folderPath)
+# tipIds = [4, 8, 12, 16, 20]  # 손가락 5개 번호
+# overlayList = []
+# fingernum=-1
+# for imPath in myList:
+#     image = cv2.imread(f'{folderPath}/{imPath}')
+#     # print(f'{folderPath}/{imPath}')
+#     overlayList.append(image)
+#
+# # Gesture recognition model
+# file = np.genfromtxt('CamApp/gesture_train.csv', delimiter=',')
+# angle = file[:,:-1].astype(np.float32)
+# label = file[:, -1].astype(np.float32)
+# knn = cv2.ml.KNearest_create() #최근접 알고리즘을 통해 학습
+#
+# knn.train(angle, cv2.ml.ROW_SAMPLE, label)
 
 class CAMERA(object):
     def __init__(self):
@@ -60,6 +71,7 @@ class CAMERA(object):
                     k=joint_list.index(joint)
                     joint_list[k][3]=angle
                     # print("joint",joint,k,angle) ############각 관절의 각도 확인용
+
                     cv2.putText(image, str(round(angle, 2)), tuple(np.multiply(b, [640, 480]).astype(int)),
                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
             return image
@@ -122,57 +134,30 @@ class CAMERA(object):
                                                     :]))  # [15,]
 
                         angle = np.degrees(angle)  # Convert radian to degree
-
-                        # Inference gesture
                         data = np.array([angle], dtype=np.float32)
-                        ret, idxnum, neighbours, dist = knn.findNearest(data, 3)
-                        idx = int(idxnum[0][0])
-                    if len(lmList) != 0:
-                        fingers = []
-                        # 엄지
-                        if lmList[tipIds[0]][1] > lmList[tipIds[0 - 1]][1]:  # 오른손
-                            if lmList[tipIds[0]][1] >= lmList[tipIds[0] - 1][1]:
-                                fingers.append(1)
-                            else:
-                                fingers.append(0)
-                        elif lmList[tipIds[0]][1] < lmList[tipIds[0 - 1]][1]:  # 왼손
-                            if lmList[tipIds[0]][1] <= lmList[tipIds[0] - 1][1]:
-                                fingers.append(1)
-                            else:
-                                fingers.append(0)
-
-                        # 손가락 네개
-                        for id in range(1, 5):
-                            if lmList[tipIds[id]][2] < lmList[tipIds[id] - 2][2]:
-                                fingers.append(1)
-
-                            else:
-                                fingers.append(0)
-
-                        totalFingers = fingers.count(1)
-                        # print(totalFingers) #숫자 출력
-                        if idx in rps_gesture.keys(): ####주먹이랑 okay때 사용
-                            cv2.putText(image, text=rps_gesture[idx].upper(), org=(45, 375),
-                                        fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=2, color=(255, 0, 127),
-                                        thickness=2)
-                        else:
-                            cv2.putText(image, str(totalFingers), (45, 375), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=5, color=(255, 0, 127),
-                                        thickness=2)
+                        result = model.predict([data]).squeeze()
+                        idx = np.argmax(result)
+                        # # Inference gesture
+                        # data = np.array([angle], dtype=np.float32)
+                        # ret, idxnum, neighbours, dist = knn.findNearest(data, 3)
+                        # idx = int(idxnum[0][0])
+                        cv2.putText(image, text=classes[idx].upper(), org=(45, 375),
+                                                                            fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=2, color=(255, 0, 127),
+                                                                            thickness=2)
                         draw_finger_angles(image, results, joint_list)
 
+
 ###################################################커서 모드########################################################################
-                    print(mode, active)
+                    # print("mode active",mode, active,joint_list)
                     if (idx==5 ) and mode == 'N':  # 손바닥 다피면 커서모드 전환
                         print("dddddddddd",mode,active)
-                        mode = 'Cursor'
-                    if mode == 'Cursor':
+                        mode = 'cursor'
+                    if mode == 'cursor':
                         active = 1
                         cv2.rectangle(image, (30, 20), (620, 470), (255, 255, 255), 3)
-                        print(mode)
-                        if idx==0 or totalFingers==0:  # 손가락 다피면  커서모드에서 나감
+                        if idx==0:  # 주먹:  커서모드에서 나감
                             active = 0
                             mode = 'N'
-                            print(mode)
                         else:
                             if len(lmList) != 0:
                                 x1, y1 = lmList[0][1], lmList[0][2]
@@ -202,32 +187,42 @@ class CAMERA(object):
 
 
 ###################################################숫자 모드########################################################################
-                    print(totalFingers,mode)
                     if mode == 'N':
                         active = 1
                         cv2.rectangle(image, (30, 20), (620, 470), (255, 255, 255), 3)
-                        if totalFingers==1 and (joint_list[0][3] <150  and joint_list[1][3] < 174 and joint_list[2][3] < 50 and joint_list[3][3] < 50 and joint_list[4][3] < 50): ###############숫자 1 구부리면 선택가능
-                            print("1클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",mode)
-                            autopy.mouse.move(692, 320)  #x,y값 넣으면됨
-                            autopy.mouse.click()
+                        if idx==1 :
+                            mode='1'
+                            if mode=='1' and (joint_list[0][3] <150  and joint_list[1][3] < 174 and joint_list[2][3] < 50 and joint_list[3][3] < 50 and joint_list[4][3] < 50): ###############숫자 1 구부리면 선택가능
+                                print("1클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",mode)
+                                autopy.mouse.move(692, 320)  #x,y값 넣으면됨
+                                autopy.mouse.click()
+                                mode = 'N'
 
-                        if totalFingers == 2 and ((150<joint_list[0][3] < 170 and joint_list[1][3] < 176 )and joint_list[2][3]< 50  and joint_list[3][3] < 50 and joint_list[4][3] < 50):###############숫자 2 구부리면 선택가능
-                            print("2클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                            autopy.mouse.move(862,366)
-                            autopy.mouse.click()
+                        if idx == 2 :
+                            mode='2'
+                            if mode=='2' and ((150<joint_list[0][3] < 170 and joint_list[1][3] < 176 )and joint_list[2][3]< 50  and joint_list[3][3] < 50 and joint_list[4][3] < 50):###############숫자 2 구부리면 선택가능
+                                print("2클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                                autopy.mouse.move(862,366)
+                                autopy.mouse.click()
+                                mode = 'N'
 
-                        if totalFingers == 3 and ((150<joint_list[0][3] < 170  or joint_list[1][3] < 175 or joint_list[2][3]< 170 )and joint_list[3][3]< 50 and joint_list[4][3] < 50):###############숫자 3 구부리면 선택가능
-                            print("3클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                            autopy.mouse.move(686,588)
-                            autopy.mouse.click()
+                        if idx == 3:
+                            mode='3'
+                            if mode=='3' and ((150<joint_list[0][3] < 170  or joint_list[1][3] < 175 or joint_list[2][3]< 170 )and joint_list[3][3]< 50 and joint_list[4][3] < 50):###############숫자 3 구부리면 선택가능
+                                print("3클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                                autopy.mouse.move(686,588)
+                                autopy.mouse.click()
+                                mode = 'N'
 
-                        if totalFingers == 4 and (joint_list[0][3] < 150 and joint_list[1][3] < 170 and joint_list[2][3]< 170 and joint_list[3][3]< 170 and joint_list[4][3] < 170) :  ###############숫자 4 구부리면 선택가능
-                            print("4클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                            autopy.mouse.move(862, 588)
-                            autopy.mouse.click()
+                        if idx == 4:
+                            if mode=='4' and (joint_list[0][3] < 150 and joint_list[1][3] < 170 and joint_list[2][3]< 170 and joint_list[3][3]< 170 and joint_list[4][3] < 170) :  ###############숫자 4 구부리면 선택가능
+                                print("4클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                                autopy.mouse.move(862, 588)
+                                autopy.mouse.click()
+                                mode = 'N'
 
 ###################################################숫자 모드########################################################################
-                    if (idx==10 ):  # 손바닥 다피면 커서모드 전환
+                    if (idx==10 ):  # okay
                         print("okay")
                         autopy.mouse.move(896,800)
                         autopy.mouse.click()
