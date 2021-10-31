@@ -21,7 +21,7 @@ hands = mp_hands.Hands(
     min_tracking_confidence=0.5)
 
 # Gesture recognition model
-model = load_model('CamApp/hand.h5')
+model = load_model('CamApp/hand2.h5')
 active = 0
 tipIds = [4, 8, 12, 16, 20]  # 손가락 5개 번호
 overlayList = []
