@@ -191,6 +191,7 @@ class CAMERA(object):
                         active = 1
                         cv2.rectangle(image, (30, 20), (620, 470), (255, 255, 255), 3)
                         if idx==1 :
+
                             mode='1'
                             if mode=='1' and (joint_list[0][3] <150  and joint_list[1][3] < 174 and joint_list[2][3] < 50 and joint_list[3][3] < 50 and joint_list[4][3] < 50): ###############숫자 1 구부리면 선택가능
                                 print("1클릭됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",mode)
@@ -222,7 +223,7 @@ class CAMERA(object):
                                 mode = 'N'
 
 ###################################################숫자 모드########################################################################
-                    if (idx==10 ):  # okay
+                    if (idx==6 ):  # okay
                         print("okay")
                         autopy.mouse.move(896,800)
                         autopy.mouse.click()

@@ -30,7 +30,6 @@ box2=[]
 box3=[]
 box4=[]
 box5=[]
-box6=[]
 mode='N'
 # active = 0
 # mp_drawing = mp.solutions.drawing_utils
@@ -236,6 +235,10 @@ class CAMERA(object):
                     if mode == 'N':
                         active = 1
                         if box and idx==1:
+                                box2.clear()
+                                box3.clear()
+                                box4.clear()
+                                box5.clear()
                                 box1.append(box[3])
                                 print("box1999999999",box1)
                                 heightDifferenceThreshold = box1[-1] * heightDifferenceFactor
@@ -245,6 +248,10 @@ class CAMERA(object):
                                     autopy.mouse.move(692, 320)  # x,y값 넣으면됨
                                     autopy.mouse.click()
                         elif box and idx==2:
+                                box1.clear()
+                                box3.clear()
+                                box4.clear()
+                                box5.clear()
                                 box2.append(box[3])
                                 print("box2",box2)
                                 heightDifferenceThreshold = box2[-1] * heightDifferenceFactor
@@ -254,6 +261,10 @@ class CAMERA(object):
                                     autopy.mouse.move(862, 366)
                                     autopy.mouse.click()
                         elif box and idx==3:
+                                box1.clear()
+                                box2.clear()
+                                box4.clear()
+                                box5.clear()
                                 box3.append(box[3])
                                 print("box3",box3)
                                 heightDifferenceThreshold = box3[-1] * heightDifferenceFactor
@@ -263,6 +274,10 @@ class CAMERA(object):
                                     autopy.mouse.move(686, 588)
                                     autopy.mouse.click()
                         elif box and idx==4:
+                                box1.clear()
+                                box2.clear()
+                                box3.clear()
+                                box5.clear()
                                 box4.append(box[3])
                                 print("box4",box4)
                                 heightDifferenceThreshold = box4[-1] * heightDifferenceFactor
@@ -282,15 +297,20 @@ class CAMERA(object):
                     #             autopy.mouse.click()
 
 ###################################################숫자 모드########################################################################
-                    # if (idx==6 ):  # okay
-                    #     print("okay")
-                    #     if box:
-                    #         height = box['bbox'][3]
-                    #         heightDifferenceThreshold = height * heightDifferenceFactor
-                    #         if len(boxsize) > 2 and (height > boxsize[-2] + heightDifferenceThreshold):
-                    #             print("okayZoom in---------------------------")
-                    #             autopy.mouse.move(896, 800)
-                    #             autopy.mouse.click()
+                    if (idx==6 ):  # okay
+                        box2.clear()
+                        box3.clear()
+                        box4.clear()
+                        box1.clear()
+                        print("okay")
+                        box5.append(box[3])
+                        print("box5", box5)
+                        heightDifferenceThreshold = box5[-1] * heightDifferenceFactor
+                        if len(box5) > 2 and (box5[-1] > box5[-2] + heightDifferenceThreshold):  ####100이상 차이나면 클릭 처리
+                            print("okayZoom in---------------------------")
+                            box5.clear()
+                            autopy.mouse.move(896, 800)
+                            autopy.mouse.click()
 
                 #########################################            출력        #########################################
 
