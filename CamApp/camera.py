@@ -31,20 +31,7 @@ box3=[]
 box4=[]
 box5=[]
 mode='N'
-# active = 0
-# mp_drawing = mp.solutions.drawing_utils
-# mp_hands = mp.solutions.hands
-# folderPath = "FingerImages"  # 손가락 번호 이미지
-# myList = os.listdir(folderPath)
-# tipIds = [4, 8, 12, 16, 20]  # 손가락 5개 번호
-# overlayList = []
-# fingernum=-1
-# for imPath in myList:
-#     image = cv2.imread(f'{folderPath}/{imPath}')
-#     # print(f'{folderPath}/{imPath}')
-#     overlayList.append(image)
-#
-# # Gesture recognition model
+# Gesture recognition model
 # file = np.genfromtxt('CamApp/gesture_train.csv', delimiter=',')
 # angle = file[:,:-1].astype(np.float32)
 # label = file[:, -1].astype(np.float32)
@@ -149,6 +136,11 @@ class CAMERA(object):
                         data = np.array([angle], dtype=np.float32)
                         result = model.predict([data]).squeeze()
                         idx = np.argmax(result)
+                        # # Inference gesture
+                        # data = np.array([angle], dtype=np.float32)
+                        # ret, idxnum, neighbours, dist = knn.findNearest(data, 3)
+                        # idx = int(idxnum[0][0])
+
                         xmin, xmax = min(xList), max(xList)
                         ymin, ymax = min(yList), max(yList)
                         boxW, boxH = xmax - xmin, ymax - ymin
@@ -175,7 +167,7 @@ class CAMERA(object):
                             mode = 'N'
                         else:
                             if len(lmList) != 0:
-                                x1, y1 = lmList[0][1], lmList[0][2]
+                                x1, y1 = lmList[9][1], lmList[9][2]
                                 w, h = autopy.screen.size()
                                 X = int(np.interp(x1, [110, 620], [0, w - 1]))
                                 Y = int(np.interp(y1, [20, 350], [0, h - 1]))
