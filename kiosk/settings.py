@@ -15,7 +15,9 @@ SECRET_KEY = 'q8ww!6m%-rin-$rmm*%eeq#-96a#6&5$sy&=857b5608@g0l$4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+        ".ap-northeast-2.compute.amazonaws.com"
+        ]
 
 
 # Application definition
@@ -71,9 +73,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kiosk',
         'USER': 'root',
-        'PASSWORD': 'password',
+        'PASSWORD': '12345678',
         'HOST': 'localhost',
-        'PORT': '3308',
+        'PORT': '3306',
         'OPTIONS': {
          "init_command": "SET foreign_key_checks = 0;",
         },
