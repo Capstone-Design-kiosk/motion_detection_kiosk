@@ -7,7 +7,7 @@ ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/motion_detection_kiosk/.config/u
  
 Restart=always
 KillSignal=SIGQUIT
-Type=notifyi
+Type=notify
 StandardError=syslog
 NotifyAccess=all
  
