@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI service
+After=syslog.target
+ 
+[Service]
+ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/motion_detection_kiosk/.config/uwsgi/kiosk.ini
+ 
+Restart=always
+KillSignal=SIGQUIT
+Type=notifyi
+StandardError=syslog
+NotifyAccess=all
+ 
+[Install]
+WantedBy=multi-user.target
