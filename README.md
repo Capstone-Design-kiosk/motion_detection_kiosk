@@ -7,6 +7,10 @@
 ![image10](https://user-images.githubusercontent.com/48480825/135270357-eeb7d2d6-6295-4043-bfe5-4cb84fb44404.gif)
 <img src="https://user-images.githubusercontent.com/48480825/135275212-2d0f3ba0-0d36-4e4f-8139-6842585a038d.gif" width="500" height="320">
 
+
+# 프로그램 구성도
+![image](https://user-images.githubusercontent.com/48480825/169756537-797fe90c-1317-4804-941f-c34a0633d2cb.png)
+
 # 수정 내용
 - 메뉴번호를 페이지별 카테고리별 1번 부터 시작하도록 수정
 - 포장 여부 선택 checkbox로 변경
